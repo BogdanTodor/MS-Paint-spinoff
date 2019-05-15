@@ -22,23 +22,11 @@ public class Plot implements Shape {
         g.draw(shape);
     }
 
-    @Override
     public double getx1() {
         return coordsScaled[0];
     }
 
-    @Override
     public double gety1() {
         return coordsScaled[1];
-    }
-
-    @Override
-    public double getx2() {
-        return 0;
-    }
-
-    @Override
-    public double gety2() {
-        return 0;
     }
 }

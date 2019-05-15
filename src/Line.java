@@ -21,22 +21,18 @@ public class Line implements Shape {
         g.draw(new Line2D.Double(getx1(), gety1(), getx2(), gety2()));
     }
 
-    @Override
     public double getx1() {
         return coordsScaled[0];
     }
 
-    @Override
     public double gety1() {
         return coordsScaled[1];
     }
 
-    @Override
     public double getx2() {
         return coordsScaled[2];
     }
 
-    @Override
     public double gety2() {
         return coordsScaled[3];
     }

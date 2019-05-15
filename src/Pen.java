@@ -1,0 +1,31 @@
+import java.awt.*;
+
+public class Pen implements Shape {
+
+    public Color color;
+
+    Pen (String input) {
+        String s[] = input.split(" #");
+        int rr = Integer.parseInt(s[1].substring(0,2), 16);
+        int gg = Integer.parseInt(s[1].substring(2,4), 16);
+        int bb = Integer.parseInt(s[1].substring(4,6), 16);
+        color = new Color(rr, gg, bb);
+    }
+
+    @Override
+    public void drawShape(Graphics2D g, int size) {
+        Colors.setPenColor(this.color);
+    }
+
+//    public Color getPenColor(){
+//        return color;
+//    }
+//
+//    public void setColor(String input){
+//        String s[] = input.split(" #");
+//        int rr = Integer.parseInt(s[1].substring(0,2), 16);
+//        int gg = Integer.parseInt(s[1].substring(2,4), 16);
+//        int bb = Integer.parseInt(s[1].substring(4,6), 16);
+//        color = new Color(rr, gg, bb);
+//    }
+}

@@ -15,6 +15,7 @@ public class GUI extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         drawingPanel mainPanel = new drawingPanel();
+        setBackground(Color.WHITE);
         getContentPane().add(mainPanel,BorderLayout.CENTER);
         setSize(WIDTH,HEIGHT);
         repaint();
@@ -33,7 +34,8 @@ class drawingPanel extends JPanel {
         Graphics2D g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         int size = Math.min(getWidth(), getHeight());
-        for (Shape shape : Shape.lineCommands) {shape.drawShape(g, size);
+        for (Shape shape : Shape.lineCommands) {
+            shape.drawShape(g, size);
         }
     }
 }

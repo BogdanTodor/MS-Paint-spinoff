@@ -7,8 +7,4 @@ public interface Shape {
 
     public void drawShape(Graphics2D g, int size);
 
-    public double getx1();
-    public double gety1();
-    public double getx2();
-    public double gety2();
 }

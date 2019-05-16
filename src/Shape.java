@@ -7,4 +7,5 @@ public interface Shape {
 
     public void drawShape(Graphics2D g, int size);
 
+    public String toString();
 }

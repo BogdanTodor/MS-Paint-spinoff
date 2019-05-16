@@ -34,6 +34,8 @@ class drawingPanel extends JPanel {
         Graphics2D g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         int size = Math.min(getWidth(), getHeight());
+        g.setColor(Color.WHITE);
+        Colors.setIsFillOn(false);
         for (Shape shape : Shape.lineCommands) {
             shape.drawShape(g, size);
         }

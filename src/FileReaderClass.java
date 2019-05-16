@@ -3,11 +3,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class FileReaderClass {
 
     public static String input;
+    public static String Path = "C:\\Users\\Bogdan\\Documents\\BnS\\tester.txt";
 
     public static String stringExtractor(String Array[]){
         input = "";
@@ -15,11 +17,10 @@ public class FileReaderClass {
             input += Array[wordPosition] + " ";
         }
         return input;
-
     }
 
-    public static void main(String[] args) throws Exception{
-        File file = new File("C:\\Users\\Bogdan\\Documents\\BnS\\tester.txt");
+    public static void Reader(String path)throws Exception{
+        File file = new File(path);
 
         BufferedReader filecontent = new BufferedReader(new FileReader(file));
 
@@ -53,6 +54,23 @@ public class FileReaderClass {
     }
 
 
+    public static void Save() throws Exception {
+        PrintWriter out = new PrintWriter("C:\\Users\\Bogdan\\Desktop\\filewriter.txt");
+
+        for(Shape shape: Shape.lineCommands){
+            System.out.println(shape);
+            //out.println(shape.getString());
+        }
+
+        String tester = "Henlo warld";
+        out.println(tester);
+
+        out.close();
+    }
 
 
+    public static void main(String[] args) throws Exception {
+        Reader(Path);
+        Save();
+    }
 }

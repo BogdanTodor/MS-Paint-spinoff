@@ -2,10 +2,10 @@ import java.awt.*;
 import java.awt.geom.Line2D;
 
 public class Line implements Shape {
-
-    String inputString;
+    
     double[] coords = new double[4];
     double[] coordsScaled = new double [4];
+    String inputString;
 
     Line( String input) {
         inputString = input;
@@ -23,8 +23,9 @@ public class Line implements Shape {
         g.draw(new Line2D.Double(getx1(), gety1(), getx2(), gety2()));
     }
 
+    @Override
     public String toString() {
-       return inputString;
+        return inputString;
     }
 
     public double getx1() {

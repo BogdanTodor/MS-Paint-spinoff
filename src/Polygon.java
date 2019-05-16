@@ -9,8 +9,10 @@ public class Polygon implements Shape {
     double[] ycoords;
     double[] xcoordsScaled;
     double[] ycoordsScaled;
+    String inputString;
 
     Polygon( String input) {
+        inputString = input;
         String s[] = input.split(" ");
         xcoords = new double[(s.length - 1)/2];
         ycoords = new double[(s.length - 1)/2];
@@ -46,5 +48,10 @@ public class Polygon implements Shape {
             g.fill(path);
         }
         g.setColor(Colors.getPenColor()); // set color back to pen color for other shapes
+    }
+
+    @Override
+    public String toString() {
+        return inputString;
     }
 }

@@ -102,8 +102,8 @@ public class Reader {
 
     public static void readFile(String input){
         String commands[] = input.split("\n");
-        Shape.lineCommands.add(new Pen("PEN #000000\n"));
-        Shape.lineCommands.add(new Fill("FILL OFF\n"));
+//        Shape.lineCommands.add(new Pen("PEN #000000"));
+//        Shape.lineCommands.add(new Fill("FILL OFF"));
         for (int i = 0; i < commands.length; i++) {
             String s[] = commands[i].split(" ");
             if (s[0].equals("LINE")) {
@@ -141,14 +141,17 @@ public class Reader {
 //        readFile(fillRectangle3);
 //        readFile(fillRectangle4);
 //        readFile(ellipse);
-//        readFile(colorTest);
+        readFile(colorTest);
 //        readFile(polygon1);
 //        readFile(polygon2);
         /*
         FOLLOWING VEC FORMATS NOT SUPPORTED YET
          */
+        String theFile = "";
+        for (Shape shape : Shape.lineCommands) {
+            theFile+=shape.toString()+"\n";
+        }
+        System.out.print(theFile);
         SwingUtilities.invokeLater(new GUI());
-
-
     }
 }

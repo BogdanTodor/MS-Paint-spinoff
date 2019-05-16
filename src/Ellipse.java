@@ -7,10 +7,12 @@ import static java.lang.Double.parseDouble;
 
 public class Ellipse extends Ellipse2D  implements Shape{
 
+    String inputString;
     double[] coords = new double[4];
     double[] coordsScaled = new double [4];
 
     Ellipse(String input) {
+        inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
             coords[i] = parseDouble(s[i+1]);
@@ -24,6 +26,11 @@ public class Ellipse extends Ellipse2D  implements Shape{
         }
         g.setColor(Colors.getPenColor());
         g.draw(new Ellipse2D.Double(getX(), getY(), getWidth(), getHeight()));
+    }
+
+    @Override
+    public String toString() {
+        return inputString;
     }
 
     @Override

@@ -5,8 +5,10 @@ public class Plot implements Shape {
 
     double[] coords = new double[2];
     double[] coordsScaled = new double [2];
+    String inputString;
 
     Plot( String input) {
+        inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
             coords[i] = Double.parseDouble(s[i+1]);
@@ -20,6 +22,11 @@ public class Plot implements Shape {
         }
         Ellipse2D.Double shape = new Ellipse2D.Double(getx1(), gety1(), 1, 1);
         g.draw(shape);
+    }
+
+    @Override
+    public String toString() {
+        return inputString;
     }
 
     public double getx1() {

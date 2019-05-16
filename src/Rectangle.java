@@ -8,10 +8,12 @@ import static java.lang.Double.parseDouble;
 
 public class Rectangle extends Rectangle2D implements Shape {
 
+    String inputString;
     double[] coords = new double[4];
     double[] coordsScaled = new double [4];
 
     Rectangle( String input) {
+        inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
             coords[i] = parseDouble(s[i+1]);
@@ -33,6 +35,11 @@ public class Rectangle extends Rectangle2D implements Shape {
             g.fill(this);
         }
         g.setColor(Colors.getPenColor()); // set color back to pen color for other shapes
+    }
+
+    @Override
+    public String toString() {
+        return inputString;
     }
 
     @Override

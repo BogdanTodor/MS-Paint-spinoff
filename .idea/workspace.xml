@@ -11,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Plot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Plot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Polygon.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Polygon.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Reader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Reader.class" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Rectangle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Rectangle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Shape.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ellipse.java" afterDir="false" />
@@ -24,6 +25,9 @@
       <change beforePath="$PROJECT_DIR$/src/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shape.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reader.java" afterDir="false" />
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,12 +37,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Reader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
               <caret line="153" column="34" lean-forward="true" selection-start-line="153" selection-start-column="34" selection-end-line="153" selection-end-column="34" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Reader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="77" column="57" lean-forward="true" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileReaderClass.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
             </state>
           </provider>
         </entry>
@@ -55,15 +80,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="404">
               <caret line="39" column="37" lean-forward="true" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+=======
+            <state relative-caret-position="349">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Colors.java">
+        <entry file="file://$PROJECT_DIR$/src/Plot.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="30">
               <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
@@ -75,6 +109,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+=======
+            <state relative-caret-position="323">
+              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
             </state>
           </provider>
         </entry>
@@ -93,9 +134,13 @@
         <option value="$PROJECT_DIR$/src/Ellipse.java" />
         <option value="$PROJECT_DIR$/src/Fill.java" />
         <option value="$PROJECT_DIR$/src/Pen.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/Plot.java" />
         <option value="$PROJECT_DIR$/src/Polygon.java" />
         <option value="$PROJECT_DIR$/src/GUI.java" />
+=======
+        <option value="$PROJECT_DIR$/src/Rectangle.java" />
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
         <option value="$PROJECT_DIR$/src/FileReaderClass.java" />
         <option value="$PROJECT_DIR$/src/Reader.java" />
       </list>
@@ -132,7 +177,12 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557975394046" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557974579214" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -146,7 +196,18 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager">
+=======
+  <component name="RunManager" selected="Application.Reader">
+    <configuration name="FileReaderClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FileReaderClass" />
+      <module name="VectorDesignToolProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
     <configuration name="Reader" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Reader" />
       <module name="VectorDesignToolProject" />
@@ -157,6 +218,13 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Reader" />
+<<<<<<< HEAD
+=======
+        <item itemvalue="Application.FileReaderClass" />
+        <item itemvalue="Application.previewTester" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.SwingPaintDemo4" />
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
       </list>
     </recent_temporary>
   </component>
@@ -206,6 +274,7 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -221,6 +290,45 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Fill.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/HelloWorld.java" />
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/HelloWorldSwingThreadSafe.java" />
+    <entry file="file://$USER_HOME$/Downloads/prac09-gui-solutions 2/src/guiExploration/Wiring.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/TabbedPaneDemo.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/BorderDemo.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/FillDemo.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/AllEvents.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/WorkerGui.java" />
+    <entry file="file://$PROJECT_DIR$/src/SwingPaintDemo4.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Runnable.java" />
+    <entry file="file://$PROJECT_DIR$/src/test.java" />
+    <entry file="file://$USER_HOME$/Downloads/prac09-gui-solutions 2/src/guiExploration/FramesAndPanels.java" />
+    <entry file="file://$PROJECT_DIR$/../prac05-patterns/src/guiSkeleton/guiEvents/GUIEvent.java" />
+    <entry file="file://$PROJECT_DIR$/../prac02-oodoc/src/heroQuestions/hero.java" />
+    <entry file="file://$PROJECT_DIR$/../prac02-oodoc/src/heroQuestions/AgentTester.java" />
+    <entry file="file://$PROJECT_DIR$/../prac02-oodoc/src/heroQuestions/SuperHero.java" />
+    <entry file="file://$PROJECT_DIR$/../Old/ams1/exercises/oop/Pasta/Main.java" />
+    <entry file="file://$PROJECT_DIR$/../prac03-unittest/src/journeyPlannerQuestion/JourneyPlannerB.java" />
+    <entry file="file://$PROJECT_DIR$/../prac03-unittest/src/journeyPlannerQuestion/JourneyPlannerA.java" />
+    <entry file="file://$PROJECT_DIR$/../prac03-unittest/src/journeyPlannerQuestion/JourneyPlannerTests.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Double.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/jdk/internal/math/FloatingDecimal.java" />
+    <entry file="file://$PROJECT_DIR$/../asgn1/exercises/oop/Shapes/ShapeHandler.java" />
+    <entry file="file://$PROJECT_DIR$/../asgn1/exercises/oop/Shapes/Shape.java" />
+    <entry file="file://$PROJECT_DIR$/../asgn1/exercises/oop/Shapes/Cone.java" />
+    <entry file="file://$PROJECT_DIR$/../asgn1/exercises/oop/Shapes/Tetrahedron.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/PanelDemo5.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/PanelDemo4.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/PanelDemo.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/PanelDemo2.java" />
+    <entry file="file://$PROJECT_DIR$/../lec09-gui/src/week8/PanelDemo3.java" />
+    <entry file="file://$PROJECT_DIR$/../Practical09/src/guiExplorer/PanelsAndWidgets.java" />
+    <entry file="file://$PROJECT_DIR$/../Practical09/src/guiExplorer/FramesAndPanels.java" />
+    <entry file="file://$PROJECT_DIR$/src/Pen.java">
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
@@ -262,6 +370,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Colors.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -270,6 +379,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pen.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/Fill.java">
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
@@ -278,6 +390,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FileReaderClass.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="242">
           <caret line="67" column="20" lean-forward="true" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
         </state>
@@ -287,6 +400,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
           <caret line="153" column="34" lean-forward="true" selection-start-line="153" selection-start-column="34" selection-end-line="153" selection-end-column="34" />
+=======
+        <state relative-caret-position="366">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Plot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+>>>>>>> c82161ffb9344e77a84d97102024ea970aec4752
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Reader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="77" column="57" lean-forward="true" selection-start-line="77" selection-start-column="57" selection-end-line="77" selection-end-column="57" />
         </state>
       </provider>
     </entry>

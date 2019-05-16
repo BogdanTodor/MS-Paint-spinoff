@@ -138,7 +138,7 @@ public class Reader {
 //        readFile(coloredRectangles2);
 //        readFile(fillRectangle);
 //        readFile(fillRectangle2);
-//        readFile(fillRectangle3);
+        readFile(fillRectangle3);
 //        readFile(fillRectangle4);
 //        readFile(ellipse);
         readFile(colorTest);

@@ -29,29 +29,10 @@ public class Rectangle extends Rectangle2D implements Shape {
         g.draw(new Line2D.Double(getX2(), getY2(), getX(), getY2()));
         g.draw(new Line2D.Double(getX(), getY2(), getX(), getY()));
         if(Colors.getIsFillOn() == true) {
-            g.setColor(Colors.getFillColor());
+            g.setColor(Colors.getFillColor()); // set color to fill color
             g.fill(this);
         }
-    }
-
-    @Override
-    public void setRect(double x, double y, double w, double h) {
-
-    }
-
-    @Override
-    public int outcode(double x, double y) {
-        return 0;
-    }
-
-    @Override
-    public Rectangle2D createIntersection(Rectangle2D r) {
-        return null;
-    }
-
-    @Override
-    public Rectangle2D createUnion(Rectangle2D r) {
-        return null;
+        g.setColor(Colors.getPenColor()); // set color back to pen color for other shapes
     }
 
     @Override
@@ -80,6 +61,27 @@ public class Rectangle extends Rectangle2D implements Shape {
     @Override
     public double getHeight() {
         return coordsScaled[3] - coordsScaled[1];
+    }
+
+    // Following methods not used, but required to override to extend Rectangle2D
+    @Override
+    public void setRect(double x, double y, double w, double h) {
+
+    }
+
+    @Override
+    public int outcode(double x, double y) {
+        return 0;
+    }
+
+    @Override
+    public Rectangle2D createIntersection(Rectangle2D r) {
+        return null;
+    }
+
+    @Override
+    public Rectangle2D createUnion(Rectangle2D r) {
+        return null;
     }
 
     @Override

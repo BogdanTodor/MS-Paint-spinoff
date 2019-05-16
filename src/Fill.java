@@ -24,12 +24,4 @@ public class Fill implements Shape {
         Colors.setIsFillOn(fill);
         Colors.setFillColor(this.color);
     }
-
-//    public static  Color getFillColor() {
-//        return color;
-//}
-//
-//    public static Boolean isFillOn() {
-//        return fill;
-//    }
 }

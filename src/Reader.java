@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 public class Reader {
 
@@ -59,9 +58,42 @@ public class Reader {
             "RECTANGLE 0.6 0.1 0.9 0.4\n" +
             "RECTANGLE 0.65 0.15 0.95 0.45";
 
+    static String fillRectangle4 = "PEN #FF0000\n" +
+            "FILL #FFFF00\n" +
+            "RECTANGLE 0.2 0.2 0.8 0.8\n" +
+            "RECTANGLE 0.05 0.05 0.15 0.15\n" +
+            "RECTANGLE 0.85 0.05 0.95 0.15\n" +
+            "RECTANGLE 0.05 0.85 0.15 0.95\n" +
+            "RECTANGLE 0.85 0.85 0.95 0.95\n" +
+            "FILL OFF\n" +
+            "RECTANGLE 0.05 0.45 0.15 0.55\n" +
+            "RECTANGLE 0.85 0.45 0.95 0.55\n" +
+            "PEN #000000\n" +
+            "RECTANGLE 0.1 0.1 0.9 0.9\n" +
+            "PEN #0000FF\n" +
+            "FILL #FFFFFF\n" +
+            "RECTANGLE 0.45 0.05 0.55 0.15\n" +
+            "RECTANGLE 0.45 0.85 0.55 0.95";
+
+    static String ellipse = "ELLIPSE 0.0 0.0 1.0 1.0\n" +
+            "ELLIPSE 0.0 0.0 1.0 0.5\n"+
+            "ELLIPSE 0.0 0.5 1.0 1.0";
+
+    static String colorTest = "PEN #FF0000\n" + // Set pen to red
+            "FILL #0000FF\n" +                  // set fill to blue
+            "RECTANGLE 0.1 0.1 0.9 0.3\n" +     // Draw red rectangle with blue fill
+            "LINE 1.0 0.0 0.0 1.0\n" +          // Draw red line
+            "PEN #00FF00\n" +                   // Change pen to green
+            "LINE 0.0 0.0 1.0 1.0\n" +          // Draw green line
+            "FILL OFF\n" +                      // Turn fill off
+            "RECTANGLE 0.1 0.4 0.9 0.6\n" +     // Draw green rectangle, no fill
+            "PEN #0000FF\n" +
+            "RECTANGLE 0.1 0.7 0.9 0.9";
 
     public static void readFile(String input){
         String commands[] = input.split("\n");
+        Shape.lineCommands.add(new Pen("PEN #000000\n"));
+        Shape.lineCommands.add(new Fill("FILL OFF\n"));
         for (int i = 0; i < commands.length; i++) {
             String s[] = commands[i].split(" ");
             if (s[0].equals("LINE")) {
@@ -73,12 +105,15 @@ public class Reader {
             else if (s[0].equals("RECTANGLE")) {
                 Shape.lineCommands.add(new Rectangle(commands[i]));
             }
+            else if (s[0].equals("ELLIPSE")) {
+                Shape.lineCommands.add(new Ellipse(commands[i]));
+            }
             else if (s[0].equals("PEN")) {
                 Shape.lineCommands.add(new Pen(commands[i]));
             }
             else if (s[0].equals("FILL")) {
-                Shape.lineCommands.add(new Fill(commands[i]));
-            }
+            Shape.lineCommands.add(new Fill(commands[i]));
+        }
         }
     }
 
@@ -88,12 +123,15 @@ public class Reader {
 //        readFile(plot1);
 //        readFile(coloredRectangles);
 //        readFile(coloredRectangles2);
+//        readFile(fillRectangle);
+//        readFile(fillRectangle2);
+//        readFile(fillRectangle3);
+//        readFile(fillRectangle4);
+//        readFile(ellipse);
+//        readFile(colorTest);
         /*
         FOLLOWING VEC FORMATS NOT SUPPORTED YET
          */
-//        readFile(fillRectangle);
-        readFile(fillRectangle2);
-//        readFile(fillRectangle3);
         SwingUtilities.invokeLater(new GUI());
     }
 }

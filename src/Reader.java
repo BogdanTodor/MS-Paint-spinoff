@@ -130,7 +130,7 @@ public class Reader {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        readFile(star);
 //        readFile(line1);
 //        readFile(plot1);
@@ -153,5 +153,9 @@ public class Reader {
         }
         System.out.print(theFile);
         SwingUtilities.invokeLater(new GUI());
+
+        FileReaderClass.open("path");
+        FileReaderClass.save("C:\\Users\\Bogdan\\Desktop\\outputtesting\\Test1.txt");
+
     }
 }

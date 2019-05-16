@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class FileReaderClass {
 
     public static String input;
-    public static String Path = "C:\\Users\\Bogdan\\Documents\\BnS\\tester.txt";
+    public static String Path = "C:\\Users\\Bogdan\\Documents\\VectorDesignToolProject\\inputTests\\polygon.txt";
 
     public static String stringExtractor(String Array[]){
         input = "";
@@ -19,14 +19,12 @@ public class FileReaderClass {
         return input;
     }
 
-    public static void Reader(String path)throws Exception{
+    public static void open(String path)throws Exception{
         File file = new File(path);
 
         BufferedReader filecontent = new BufferedReader(new FileReader(file));
 
         String line;
-
-        line = filecontent.readLine();
 
         while((line = filecontent.readLine()) != null){
             String[] splitted = line.split(" ");
@@ -48,29 +46,26 @@ public class FileReaderClass {
             else if (splitted[0].equals("FILL")) {
                 Shape.lineCommands.add(new Fill(stringExtractor(splitted)));
             }
-
+            else if (splitted[0].equals("ELLIPSE")) {
+                Shape.lineCommands.add(new Ellipse(stringExtractor(splitted)));
+            }
+            else if (splitted[0].equals("POLYGON")) {
+                Shape.lineCommands.add(new Polygon(stringExtractor(splitted)));
+            }
         }
         filecontent.close();
     }
 
 
-    public static void Save() throws Exception {
-        PrintWriter out = new PrintWriter("C:\\Users\\Bogdan\\Desktop\\filewriter.txt");
+    public static void save(String SaveLocation) throws Exception {
+        PrintWriter out = new PrintWriter(SaveLocation);
 
         for(Shape shape: Shape.lineCommands){
-            System.out.println(shape);
-            //out.println(shape.getString());
+            String l = shape.toString();
+            out.println(l);
+            System.out.println(l);
         }
-
-        String tester = "Henlo warld";
-        out.println(tester);
-
         out.close();
     }
 
-
-    public static void main(String[] args) throws Exception {
-        Reader(Path);
-        Save();
-    }
 }

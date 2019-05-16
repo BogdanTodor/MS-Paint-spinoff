@@ -90,6 +90,16 @@ public class Reader {
             "PEN #0000FF\n" +
             "RECTANGLE 0.1 0.7 0.9 0.9";
 
+    static String polygon1 = "FILL #00FF00\n" +
+            "POLYGON 0.0 0.0 1.0 0.0 0.0 1.0 1.0 1.0";
+
+    static String polygon2 = "FILL #FFFF00\n" +
+            "POLYGON 0.51 0.08 0.65 0.31 " +
+            "0.95 0.29 0.78 0.52 0.95 0.74 " +
+            "0.65 0.72 0.51 0.95 0.37 0.72 " +
+            "0.07 0.73 0.25 0.52 0.07 0.29 " +
+            "0.38 0.31";
+
     public static void readFile(String input){
         String commands[] = input.split("\n");
         Shape.lineCommands.add(new Pen("PEN #000000\n"));
@@ -107,6 +117,9 @@ public class Reader {
             }
             else if (s[0].equals("ELLIPSE")) {
                 Shape.lineCommands.add(new Ellipse(commands[i]));
+            }
+            else if (s[0].equals("POLYGON")) {
+                Shape.lineCommands.add(new Polygon(commands[i]));
             }
             else if (s[0].equals("PEN")) {
                 Shape.lineCommands.add(new Pen(commands[i]));
@@ -129,9 +142,13 @@ public class Reader {
 //        readFile(fillRectangle4);
 //        readFile(ellipse);
 //        readFile(colorTest);
+//        readFile(polygon1);
+//        readFile(polygon2);
         /*
         FOLLOWING VEC FORMATS NOT SUPPORTED YET
          */
         SwingUtilities.invokeLater(new GUI());
+
+
     }
 }

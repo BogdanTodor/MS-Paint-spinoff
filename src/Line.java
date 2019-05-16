@@ -3,10 +3,12 @@ import java.awt.geom.Line2D;
 
 public class Line implements Shape {
 
+    String inputString;
     double[] coords = new double[4];
     double[] coordsScaled = new double [4];
 
     Line( String input) {
+        inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
             coords[i] = Double.parseDouble(s[i+1]);
@@ -19,6 +21,10 @@ public class Line implements Shape {
             coordsScaled[i] = coords[i]*size;
         }
         g.draw(new Line2D.Double(getx1(), gety1(), getx2(), gety2()));
+    }
+
+    public String toString() {
+       return inputString;
     }
 
     public double getx1() {

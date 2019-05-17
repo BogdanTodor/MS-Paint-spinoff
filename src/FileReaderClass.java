@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class FileReaderClass {
 
     public static String input;
-    public static String Path = "C:\\Users\\Bogdan\\Documents\\VectorDesignToolProject\\inputTests\\polygon.txt";
 
     public static String stringExtractor(String Array[]){
         input = "";
@@ -25,6 +24,7 @@ public class FileReaderClass {
         BufferedReader filecontent = new BufferedReader(new FileReader(file));
 
         String line;
+        Shape.lineCommands.clear(); // clears any previously opened VEC file
 
         while((line = filecontent.readLine()) != null){
             String[] splitted = line.split(" ");

@@ -24,7 +24,6 @@ public class Ellipse extends Ellipse2D  implements Shape{
         for (int i = 0; i < coordsScaled.length; i++) {
             coordsScaled[i] = coords[i]*size;
         }
-        g.setColor(Colors.getPenColor());
         g.draw(new Ellipse2D.Double(getX(), getY(), getWidth(), getHeight()));
     }
 

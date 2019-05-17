@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2296e8a3-6f33-4e6a-8483-f598bf153e95" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/old_Reader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inputTests/ellipse.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/FileReaderClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/FileReaderClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Ellipse.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Ellipse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Reader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Reader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Reader.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/drawingPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/drawingPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileReaderClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileReaderClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ellipse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ellipse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Reader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Reader.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,30 +26,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="43" selection-start-line="43" selection-start-column="2" selection-end-line="43" selection-end-column="36" />
+            <state relative-caret-position="271">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
               <folding>
-                <element signature="e#3029#3030#0" expanded="true" />
-                <element signature="e#3063#3064#0" expanded="true" />
+                <element signature="e#3446#3447#0" expanded="true" />
+                <element signature="e#3469#3470#0" expanded="true" />
+                <element signature="e#3522#3523#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Reader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FileReaderClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -66,7 +51,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/FileReaderClass.java" />
+        <option value="$PROJECT_DIR$/src/Ellipse.java" />
         <option value="$PROJECT_DIR$/src/Reader.java" />
+        <option value="$PROJECT_DIR$/src/old_Reader.java" />
         <option value="$PROJECT_DIR$/src/GUI.java" />
       </list>
     </option>
@@ -104,6 +91,11 @@
               <item name="Vector_Design_Tool" type="58d84e3e:PackageViewProjectNode" />
               <item name="VectorDesignToolProject" type="616d4139:PackageViewModuleNode" />
             </path>
+            <path>
+              <item name="Vector_Design_Tool" type="58d84e3e:PackageViewProjectNode" />
+              <item name="VectorDesignToolProject" type="616d4139:PackageViewModuleNode" />
+              <item name="GUI.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -112,7 +104,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558070935662" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558074485061" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -126,9 +118,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Reader">
+  <component name="RunManager" selected="Application.GUI">
     <configuration name="FileReaderClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="FileReaderClass" />
+      <module name="VectorDesignToolProject" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI" />
       <module name="VectorDesignToolProject" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -143,6 +142,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.Reader" />
         <item itemvalue="Application.FileReaderClass" />
       </list>
@@ -165,7 +165,7 @@
     <frame x="0" y="23" width="1366" height="893" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17296073" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17522658" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -173,7 +173,7 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32958803" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.16604245" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -201,13 +201,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="45" column="31" lean-forward="true" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rectangle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -225,25 +218,47 @@
     <entry file="file://$PROJECT_DIR$/inputTests/colorTest.VEC.txt" />
     <entry file="file://$PROJECT_DIR$/src/FileReaderClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="-31">
+          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Reader.java">
+    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        <state relative-caret-position="247">
+          <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ellipse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="22" column="40" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Line.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/old_Reader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="43" selection-start-line="43" selection-start-column="2" selection-end-line="43" selection-end-column="36" />
+        <state relative-caret-position="271">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
           <folding>
-            <element signature="e#3029#3030#0" expanded="true" />
-            <element signature="e#3063#3064#0" expanded="true" />
+            <element signature="e#3446#3447#0" expanded="true" />
+            <element signature="e#3469#3470#0" expanded="true" />
+            <element signature="e#3522#3523#0" expanded="true" />
           </folding>
         </state>
       </provider>

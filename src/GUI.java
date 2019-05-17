@@ -1,7 +1,10 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
+import java.io.File;
 
 
 public class GUI extends JFrame implements Runnable {
@@ -24,11 +27,28 @@ public class GUI extends JFrame implements Runnable {
 
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
         JPanel mainPanel, leftPanel, topPanel, rightPanel, bottomPanel;
         JButton openButton, saveButton;
 
         openButton = new JButton("Open");
+        openButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION)
+                {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    try {
+                        FileReaderClass.open(selectedFile.getPath());
+                        pane.validate();
+                    }
+                    catch (Exception ex) {
+
+                    }
+                }
+            }
+        });
         c.gridx = 0;
         c.gridy = 0;
         pane.add(openButton, c);
@@ -38,64 +58,57 @@ public class GUI extends JFrame implements Runnable {
         c.gridy = 0;
         pane.add(saveButton, c);
 
-        c.fill = GridBagConstraints.BOTH; // Turn on for following panels
-
         topPanel = new JPanel();
         topPanel.setBackground(Color.LIGHT_GRAY);
         topPanel.setBorder(new LineBorder(Color.GRAY));
-        c.gridwidth = 4;
-        c.gridx = 0;
-        c.gridy = 0;
-        pane.add(topPanel, c);
+        setConstraints(topPanel,0,0,4,1,0,0,c,pane);
 
         leftPanel = new JPanel();
         leftPanel.setBackground(Color.LIGHT_GRAY);
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 1;
-        pane.add(leftPanel, c);
+        setConstraints(leftPanel,0,1,2,1,0,0,c,pane);
 
         mainPanel = new drawingPanel();
-        c.weightx = 1;
-        c.weighty = 1;
-        c.gridwidth = 1;
-        c.gridx = 2;
-        c.gridy = 1;
-        pane.add(mainPanel, c);
+        setConstraints(mainPanel,2,1,1,1,1,1,c,pane);
+
 
         rightPanel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(pane.getWidth() - mainPanel.getWidth() - leftPanel.getWidth() - 1, 0);
+                return new Dimension(pane.getWidth() - mainPanel.getWidth() - leftPanel.getWidth() - 3, 0);
             }
         };
         rightPanel.setBackground(Color.LIGHT_GRAY);
-        c.weightx = 0;
-        c.weighty = 0;
-        c.gridwidth = 1;
-        c.gridx = 3;
-        c.gridy = 1;
-        pane.add(rightPanel, c);
+        setConstraints(rightPanel,3,1,1,1,0,0,c,pane);
 
         bottomPanel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(0, pane.getHeight() - mainPanel.getHeight() - topPanel.getHeight() -1);
+                return new Dimension(0, pane.getHeight() - mainPanel.getHeight() - topPanel.getHeight() -3);
             }
         };
         bottomPanel.setBackground(Color.LIGHT_GRAY);
-        c.weightx = 0;
-        c.weighty = 0;
-        c.gridwidth = 4;
-        c.gridx = 0;
-        c.gridy = 2;
-        pane.add(bottomPanel, c);
+        setConstraints(bottomPanel,0,2,4,1,0,0,c,pane);
+    }
+
+    public static void setConstraints(JPanel panel, int gridx, int gridy, int gridwidth, int gridheight, int weightx, int weighty, GridBagConstraints c, Container pane) {
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = gridx;
+        c.gridy = gridy;
+        c.gridwidth = gridwidth;
+        c.gridheight = gridheight;
+        c.weightx = weightx;
+        c.weighty = weighty;
+        pane.add(panel, c);
     }
 
 
     @Override
     public void run() {
         createAndShowGUI();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new GUI());
     }
 }
 

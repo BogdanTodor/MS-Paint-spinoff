@@ -52,6 +52,12 @@ public class GUI extends JFrame implements Runnable {
         pane.add(openButton, c);
 
         saveButton = new JButton("Save");
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveButtonClick(pane);
+            }
+        });
         c.anchor = GridBagConstraints.LINE_START;
         c.gridx = 2;
         c.gridy = 0;
@@ -113,6 +119,21 @@ public class GUI extends JFrame implements Runnable {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 FileReaderClass.open(selectedFile.getPath());
+                pane.validate();
+            }
+            catch (Exception ex) {
+            }
+        }
+    }
+
+    public static void saveButtonClick(Container pane) {
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showSaveDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                FileReaderClass.save(selectedFile.getPath());
                 pane.validate();
             }
             catch (Exception ex) {

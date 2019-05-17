@@ -24,37 +24,36 @@ public class GUI extends JFrame implements Runnable {
     }
 
     public static void addComponentsToPane(Container pane) {
-
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         JPanel mainPanel, leftPanel, topPanel, rightPanel, bottomPanel;
-        JButton openButton, saveButton;
+        JButton newButton, openButton, saveButton;
+
+        newButton = new JButton("New");
+        newButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newButtonClick(pane);
+            }
+        });
+        c.gridx = 0;
+        c.gridy = 0;
+        pane.add(newButton, c);
 
         openButton = new JButton("Open");
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION)
-                {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    try {
-                        FileReaderClass.open(selectedFile.getPath());
-                        pane.validate();
-                    }
-                    catch (Exception ex) {
-
-                    }
-                }
+                openButtonClick(pane);
             }
         });
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 0;
         pane.add(openButton, c);
 
         saveButton = new JButton("Save");
-        c.gridx = 1;
+        c.anchor = GridBagConstraints.LINE_START;
+        c.gridx = 2;
         c.gridy = 0;
         pane.add(saveButton, c);
 
@@ -101,6 +100,25 @@ public class GUI extends JFrame implements Runnable {
         pane.add(panel, c);
     }
 
+    public static void newButtonClick(Container pane) {
+        Shape.lineCommands.clear();
+        pane.validate();
+    }
+
+    public static void openButtonClick(Container pane) {
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = fileChooser.getSelectedFile();
+            try {
+                FileReaderClass.open(selectedFile.getPath());
+                pane.validate();
+            }
+            catch (Exception ex) {
+            }
+        }
+    }
 
     @Override
     public void run() {

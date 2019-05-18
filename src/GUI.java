@@ -7,6 +7,8 @@ import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame implements Runnable {
 
@@ -28,7 +30,7 @@ public class GUI extends JFrame implements Runnable {
 
     }
 
-    public static void addComponentsToPane(Container pane) {
+    public void addComponentsToPane(Container pane) {
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         JPanel mainPanel, leftPanel, topPanel, rightPanel, bottomPanel;
@@ -72,8 +74,8 @@ public class GUI extends JFrame implements Runnable {
         // Moved panel creation here to not break GUI design
         mainPanel = new drawingPanel();
 
-        // Create a mouse listener object
-        MouseListener mousePosition = new MouseClickEvent();
+
+//        MouseListener mousePosition = new MouseClickEvent();
 
         // Adds a toggle button which allows user to trigger mouse clicks as coordinates for plotting.
         plotButton = new JToggleButton("Plot");
@@ -89,13 +91,12 @@ public class GUI extends JFrame implements Runnable {
                         }
                     });
                     plotToggle = true;
-                    mainPanel.addMouseListener(mousePosition);
-
+//                    mainPanel.addMouseListener(mousePosition);
 
                 } else if(e.getStateChange() == ItemEvent.DESELECTED){
                     System.out.println("Plotting disabled");
                     plotToggle = false;
-                    mainPanel.removeMouseListener(mousePosition);
+//                    mainPanel.removeMouseListener(mousePosition);
                 }
 
             }
@@ -106,6 +107,22 @@ public class GUI extends JFrame implements Runnable {
         c.gridx = 3;
         c.gridy = 0;
         pane.add(plotButton, c);
+
+
+
+//        public static class canvasResizeEvent implements ComponentListener{
+//            public void componentResized(ComponentEvent c) {
+////            System.out.println(c.getComponent().getHeight());
+////            System.out.println(WIDTH);
+////            System.out.println((c));
+//                dynamicHeight = c.getComponent().getHeight();
+//                dynamicWidth = c.getComponent().getHeight();
+//
+//            }
+//            public void componentMoved(ComponentEvent c) {}
+//            public void componentShown(ComponentEvent c) {}
+//            public void componentHidden(ComponentEvent c) {}
+//        }
 
         topPanel = new JPanel();
         topPanel.setBackground(Color.LIGHT_GRAY);
@@ -138,39 +155,69 @@ public class GUI extends JFrame implements Runnable {
         bottomPanel.setBackground(Color.LIGHT_GRAY);
         setConstraints(bottomPanel,0,2,4,1,0,0,c,pane);
 
-        mainPanel.addComponentListener(new canvasResizeEvent());
-    }
+//        mainPanel.addComponentListener(new canvasResizeEvent());
 
-    public static class MouseClickEvent implements MouseListener{
-        public void mouseClicked(MouseEvent e) {
-            if(plotToggle){
-            System.out.println(e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight);
-            Shape.lineCommands.add(new Plot("PLOT "+e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
-            // Validating that the mouse clicks are being registered into the linkedlist.
-            for (Shape shape : Shape.lineCommands) {
-                System.out.println(shape);
+        mainPanel.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent c) {
+                dynamicHeight = c.getComponent().getHeight();
+                dynamicWidth = c.getComponent().getHeight();
+//                System.out.println(c);
+//                System.out.println(c.getComponent().getHeight());
+
+            }
+        });
+
+        mainPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(plotToggle){
+                    System.out.println(e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight);
+                    Shape.lineCommands.add(new Plot("PLOT "+e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+                    // Validating that the mouse clicks are being registered into the linkedlist.
+//                    System.out.println(e);
+//                    for (Shape shape : Shape.lineCommands) {
+//                        System.out.println(shape);
+//                    }
+                    revalidate();
+                    repaint();
+
                 }
             }
-        }
-        public void mousePressed(MouseEvent e){}
-        public void mouseReleased(MouseEvent e){}
-        public void mouseEntered(MouseEvent e){}
-        public void mouseExited(MouseEvent e){}
+        });
     }
 
-    public static class canvasResizeEvent implements ComponentListener{
-        public void componentResized(ComponentEvent c) {
-//            System.out.println(c.getComponent().getHeight());
-//            System.out.println(WIDTH);
-//            System.out.println((c));
-            dynamicHeight = c.getComponent().getHeight();
-            dynamicWidth = c.getComponent().getHeight();
+//    public static class MouseClickEvent implements MouseListener{
+//        public void mouseClicked(MouseEvent e) {
+//            if(plotToggle){
+//            System.out.println(e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight);
+//            Shape.lineCommands.add(new Plot("PLOT "+e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+//            // Validating that the mouse clicks are being registered into the linkedlist.
+//            for (Shape shape : Shape.lineCommands) {
+//                System.out.println(shape);
+//                }
+//
+//            }
+//        }
+//        public void mousePressed(MouseEvent e){}
+//        public void mouseReleased(MouseEvent e){}
+//        public void mouseEntered(MouseEvent e){}
+//        public void mouseExited(MouseEvent e){}
+//    }
 
-        }
-        public void componentMoved(ComponentEvent c) {}
-        public void componentShown(ComponentEvent c) {}
-        public void componentHidden(ComponentEvent c) {}
-    }
+//    public static class canvasResizeEvent implements ComponentListener{
+//        public void componentResized(ComponentEvent c) {
+////            System.out.println(c.getComponent().getHeight());
+////            System.out.println(WIDTH);
+////            System.out.println((c));
+//            dynamicHeight = c.getComponent().getHeight();
+//            dynamicWidth = c.getComponent().getHeight();
+//
+//        }
+//        public void componentMoved(ComponentEvent c) {}
+//        public void componentShown(ComponentEvent c) {}
+//        public void componentHidden(ComponentEvent c) {}
+//    }
 
 
 
@@ -247,17 +294,22 @@ class drawingPanel extends JPanel {
         setSize(500,500);
         setBorder(new LineBorder(Color.GRAY));
         setVisible(true);
+//        repaint();
     }
 
     public void paintComponent(Graphics graphics) {
-        Graphics2D g = (Graphics2D) graphics;
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        int size = Math.min(getWidth(), getHeight());
-        setSize(size, size);
-        g.setColor(Color.BLACK);
-        Colors.setIsFillOn(false);
-        for (Shape shape : Shape.lineCommands) {
-            shape.drawShape(g, size);
+        if(GUI.plotToggle){
+            Graphics2D g = (Graphics2D) graphics;
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            int size = Math.min(getWidth(), getHeight());
+            setSize(size, size);
+            g.setColor(Color.BLACK);
+            Colors.setIsFillOn(false);
+            for (Shape shape : Shape.lineCommands) {
+                shape.drawShape(g, size);
+            }
+//            ();
+//            revalidate();
         }
     }
 

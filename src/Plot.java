@@ -22,6 +22,7 @@ public class Plot implements Shape {
         }
         Ellipse2D.Double shape = new Ellipse2D.Double(getx1(), gety1(), 1, 1);
         g.draw(shape);
+        System.out.println("Plotted point");
     }
 
     @Override

@@ -86,7 +86,7 @@ public class GUI extends JFrame implements Runnable {
                         @Override
                         protected Color getSelectColor(){
                             return Color.GREEN;
-                        };
+                        }
                     });
                     plotToggle = true;
                     mainPanel.addMouseListener(mousePosition);
@@ -95,9 +95,6 @@ public class GUI extends JFrame implements Runnable {
                     System.out.println("Plotting disabled");
                     plotToggle = false;
                     mainPanel.removeMouseListener(mousePosition);
-//                    for(int i = 1; i<mainPanel.getMouseListeners().length-1;i++){
-//                        mainPanel.removeMouseListener(mainPanel.getMouseListeners()[i]);
-//                    }
                 }
 
             }
@@ -146,8 +143,10 @@ public class GUI extends JFrame implements Runnable {
         public void mouseClicked(MouseEvent e) {
             if(plotToggle){
             System.out.println(e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight);
-//            System.out.println(e.getX());
-//            System.out.println(dynamicHeight);
+//            new Plot((e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight));
+//            new Plot("PLOT "+ e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight);
+//            Shape.lineCommands.add(new Plot(stringExtractor(splitted)));
+
             }
         }
         public void mousePressed(MouseEvent e){}

@@ -91,6 +91,7 @@ public class GUI extends JFrame implements Runnable {
                     plotToggle = true;
                     mainPanel.addMouseListener(mousePosition);
 
+
                 } else if(e.getStateChange() == ItemEvent.DESELECTED){
                     System.out.println("Plotting disabled");
                     plotToggle = false;
@@ -98,6 +99,7 @@ public class GUI extends JFrame implements Runnable {
                 }
 
             }
+
         });
 
         c.anchor = GridBagConstraints.LINE_START;
@@ -143,10 +145,11 @@ public class GUI extends JFrame implements Runnable {
         public void mouseClicked(MouseEvent e) {
             if(plotToggle){
             System.out.println(e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight);
-//            new Plot((e.getX()/dynamicWidth + ", " + e.getY()/dynamicHeight));
-//            new Plot("PLOT "+ e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight);
-//            Shape.lineCommands.add(new Plot(stringExtractor(splitted)));
-
+            Shape.lineCommands.add(new Plot("PLOT "+e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+            // Validating that the mouse clicks are being registered into the linkedlist.
+            for (Shape shape : Shape.lineCommands) {
+                System.out.println(shape);
+                }
             }
         }
         public void mousePressed(MouseEvent e){}
@@ -162,17 +165,11 @@ public class GUI extends JFrame implements Runnable {
 //            System.out.println((c));
             dynamicHeight = c.getComponent().getHeight();
             dynamicWidth = c.getComponent().getHeight();
-        }
-        public void componentMoved(ComponentEvent c) {
-//            System.out.println(c);
-        }
-        public void componentShown(ComponentEvent c) {
-            System.out.println(c);
-        }
-        public void componentHidden(ComponentEvent c) {
-//            System.out.println(c);
-        }
 
+        }
+        public void componentMoved(ComponentEvent c) {}
+        public void componentShown(ComponentEvent c) {}
+        public void componentHidden(ComponentEvent c) {}
     }
 
 
@@ -220,8 +217,6 @@ public class GUI extends JFrame implements Runnable {
         FileFilter VECFilter = new FilterFileType(".VEC", "VEC Documents");
         fileChooser.addChoosableFileFilter(VECFilter);
         fileChooser.setFileFilter(VECFilter);
-
-
 
         int returnValue = fileChooser.showSaveDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION)

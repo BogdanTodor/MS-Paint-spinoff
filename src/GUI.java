@@ -1,11 +1,11 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
 import java.io.File;
-
 
 public class GUI extends JFrame implements Runnable {
 
@@ -113,6 +113,11 @@ public class GUI extends JFrame implements Runnable {
 
     public static void openButtonClick(Container pane) {
         JFileChooser fileChooser = new JFileChooser();
+        // Creates filter for VEC files, adds the filter to the open event and sets the filter as the default file type.
+        FileFilter VECFilter = new FilterFileType(".VEC", "VEC Documents");
+        fileChooser.addChoosableFileFilter(VECFilter);
+        fileChooser.setFileFilter(VECFilter);
+
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION)
         {
@@ -127,13 +132,21 @@ public class GUI extends JFrame implements Runnable {
     }
 
     public static void saveButtonClick(Container pane) {
+        // set file filter
         JFileChooser fileChooser = new JFileChooser();
+
+        FileFilter VECFilter = new FilterFileType(".VEC", "VEC Documents");
+        fileChooser.addChoosableFileFilter(VECFilter);
+        fileChooser.setFileFilter(VECFilter);
+
+
+
         int returnValue = fileChooser.showSaveDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION)
         {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                FileReaderClass.save(selectedFile.getPath());
+                FileReaderClass.save(selectedFile.getPath()+".VEC");
                 pane.validate();
             }
             catch (Exception ex) {

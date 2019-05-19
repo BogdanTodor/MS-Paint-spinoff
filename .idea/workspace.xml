@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2296e8a3-6f33-4e6a-8483-f598bf153e95" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$MouseClickEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$canvasResizeEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Plot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Plot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/drawingPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/drawingPanel.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Plot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plot.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="180" column="23" lean-forward="true" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="23" />
+            <state relative-caret-position="289">
+              <caret line="158" column="5" lean-forward="true" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1382#1383#0" expanded="true" />
@@ -52,7 +38,7 @@
                 <element signature="e#5809#5810#0" expanded="true" />
                 <element signature="e#5839#6564#0" expanded="true" />
                 <element signature="e#6563#6564#0" expanded="true" />
-                <element signature="e#10101#10102#0" expanded="true" />
+                <element signature="e#7639#7640#0" expanded="true" />
                 <element signature="e#8056#8057#0" expanded="true" />
                 <element signature="e#8109#8110#0" expanded="true" />
               </folding>
@@ -211,7 +197,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558220549737" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558251424106" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -406,8 +392,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="180" column="23" lean-forward="true" selection-start-line="180" selection-start-column="23" selection-end-line="180" selection-end-column="23" />
+        <state relative-caret-position="289">
+          <caret line="158" column="5" lean-forward="true" selection-start-line="158" selection-start-column="5" selection-end-line="158" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1382#1383#0" expanded="true" />
@@ -422,7 +408,7 @@
             <element signature="e#5809#5810#0" expanded="true" />
             <element signature="e#5839#6564#0" expanded="true" />
             <element signature="e#6563#6564#0" expanded="true" />
-            <element signature="e#10101#10102#0" expanded="true" />
+            <element signature="e#7639#7640#0" expanded="true" />
             <element signature="e#8056#8057#0" expanded="true" />
             <element signature="e#8109#8110#0" expanded="true" />
           </folding>

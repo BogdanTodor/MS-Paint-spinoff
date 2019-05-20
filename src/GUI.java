@@ -76,6 +76,18 @@ public class GUI extends JFrame implements Runnable {
         });
         menu.add(menuItem);
 
+        menu = new JMenu("Edit");
+        menuBar.add(menu);
+
+        menuItem = new JMenuItem("Grid size");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editGridSize();
+            }
+        });
+        menu.add(menuItem);
+
         return menuBar;
     }
 
@@ -179,10 +191,36 @@ public class GUI extends JFrame implements Runnable {
         pane.add(fillToggleButton, c);
 
         gridButton = new JToggleButton("Grid: Off");
+        gridButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (gridButton.isSelected()) {
+                    gridButton.setText("Grid: On");
+
+                }
+                else if (!gridButton.isSelected()) {
+                    gridButton.setText("Grid: Off");
+                }
+                revalidate();
+                repaint();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 4;
         pane.add(gridButton, c);
+
+//        c.gridwidth = 1;
+//        JLabel gridSizeLabel = new JLabel("     Grid size:");
+//        c.gridx = 0;
+//        c.gridy = 5;
+//        pane.add(gridSizeLabel, c);
+//
+//        JTextField gridSizeField = new JTextField(5);
+//        c.gridx = 1;
+//        c.gridy = 5;
+//        c.fill = GridBagConstraints.NONE;
+//        pane.add(gridSizeField, c);
 
         /*
         ADD COLOR CHOOSERS
@@ -231,7 +269,7 @@ public class GUI extends JFrame implements Runnable {
         colorTabs.addTab("Pen", penColorChooser);
         colorTabs.addTab("Fill", fillColorChooser);
         c.gridx = 0;
-        c.gridy = 5;
+        c.gridy = 6;
         c.gridwidth = 3;
         c.gridheight = 1;
         c.anchor = GridBagConstraints.PAGE_START;
@@ -244,7 +282,7 @@ public class GUI extends JFrame implements Runnable {
         // Left panel
         leftPanel = new JPanel();
         leftPanel.setBackground(Color.LIGHT_GRAY);
-        setConstraints(leftPanel,0,0,2,5,0,0,c,pane);
+        setConstraints(leftPanel,0,0,2,6,0,0,c,pane);
 
         // Right panel
         rightPanel = new JPanel() {
@@ -254,7 +292,7 @@ public class GUI extends JFrame implements Runnable {
             }
         };
         rightPanel.setBackground(Color.LIGHT_GRAY);
-        setConstraints(rightPanel,3,0,1,5,0,0,c,pane);
+        setConstraints(rightPanel,3,0,1,6,0,0,c,pane);
 
         // Bottom panel
         bottomPanel = new JPanel() {
@@ -264,10 +302,10 @@ public class GUI extends JFrame implements Runnable {
             }
         };
         bottomPanel.setBackground(Color.LIGHT_GRAY);
-        setConstraints(bottomPanel,0,5,4,1,0,0,c,pane);
+        setConstraints(bottomPanel,0,6,4,1,0,0,c,pane);
 
         // Main drawing canvas panel
-        setConstraints(mainPanel,2,0,1,5,1,1,c,pane);
+        setConstraints(mainPanel,2,0,1,6,1,1,c,pane);
 
         // Keep track of main drawing canvas panel size
         mainPanel.addComponentListener(new ComponentAdapter() {
@@ -362,6 +400,12 @@ public class GUI extends JFrame implements Runnable {
         pane.add(panel, c);
     }
 
+
+    public static void editGridSize() {
+        String input = JOptionPane.showInputDialog(null, "Enter grid size ranging from 0 to 0.5");
+        System.out.println(input);
+    }
+
     /**
      * When menu bar > 'File' > 'new' is clicked, clear the current list of VEC shapes and repaint the canvas blank.
      * Fill toggle button is toggled to off.
@@ -447,6 +491,18 @@ public class GUI extends JFrame implements Runnable {
         }
     }
 
+//    /**
+//     * Configure the grid.
+//     *
+//     * @parem state if the grid is on or off.
+//     *
+//     */
+//    public void configureGrid(boolean state) {
+//        if (state == true) {
+//            gridButton.setText("Grid: On");
+//        }
+//    }
+
     @Override
     public void run() {
         createAndShowGUI();
@@ -486,5 +542,4 @@ class drawingPanel extends JPanel {
             shape.drawShape(g, size);
         }
     }
-
 }

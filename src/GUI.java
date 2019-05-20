@@ -15,11 +15,16 @@ import java.awt.event.MouseEvent;
 public class GUI extends JFrame implements Runnable {
 
     JMenuBar menuBar;
+    JToggleButton fillToggleButton;
     public static final int WIDTH = 460;
     public static final int HEIGHT = 470;
     public static double dynamicWidth;
     public static double dynamicHeight;
 
+    /**
+     * Create the GUI and show it. For thread safety, this method should be
+     * invoked from the event-dispatching thread.
+     */
     private void createAndShowGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH,HEIGHT);
@@ -32,6 +37,9 @@ public class GUI extends JFrame implements Runnable {
         this.setVisible(true);
     }
 
+    /**
+     * Create the menu bar.
+     */
     public JMenuBar createMenuBar() {
         JMenu menu;
         JMenuItem menuItem;
@@ -71,20 +79,31 @@ public class GUI extends JFrame implements Runnable {
         return menuBar;
     }
 
+    /**
+     * Adds components to the content pane, including:
+     * Panels, Buttons, ColorChoosers, Tabs
+     *
+     * @parem pane the pane to add components to.
+     *
+     */
     public void addComponentsToPane(Container pane) {
+        // Setup layout and components
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         JPanel mainPanel, leftPanel, rightPanel, bottomPanel;
         JButton undoButton;
         ButtonGroup drawingButtons = new ButtonGroup();
-        JToggleButton plotButton, lineButton, rectangleButton, ellipseButton, polyButton, fillToggleButton, gridButton;
+        JToggleButton plotButton, lineButton, rectangleButton, ellipseButton, polyButton, gridButton;
         JColorChooser penColorChooser, fillColorChooser;
         JTabbedPane colorTabs;
 
+        // Initialise require components first
         mainPanel = new drawingPanel();
         fillColorChooser = new JColorChooser();
 
-        // Add buttons
+        /*
+        ADD BUTTONS
+         */
         c.fill = GridBagConstraints.HORIZONTAL;
 
         plotButton = new JToggleButton("Plot");
@@ -165,7 +184,10 @@ public class GUI extends JFrame implements Runnable {
         c.gridy = 4;
         pane.add(gridButton, c);
 
-        // Add color choosers
+        /*
+        ADD COLOR CHOOSERS
+         */
+        // Pen Color Chooser
         penColorChooser = new JColorChooser();
         penColorChooser.setPreviewPanel(new JPanel()); // removes the preview panel
         AbstractColorChooserPanel[] panels = penColorChooser.getChooserPanels();
@@ -184,6 +206,7 @@ public class GUI extends JFrame implements Runnable {
         };
         penModel.addChangeListener(changeListenerPen);
 
+        // Fill Color Chooser
         fillColorChooser.setPreviewPanel(new JPanel()); // removes the preview panel
         AbstractColorChooserPanel[] panels2 = fillColorChooser.getChooserPanels();
         for (AbstractColorChooserPanel accp : panels2) { // remove other tabs
@@ -203,7 +226,7 @@ public class GUI extends JFrame implements Runnable {
         };
         fillModel.addChangeListener(changeListenerFill);
 
-
+        // Add color choosers to respective tabs
         colorTabs = new JTabbedPane();
         colorTabs.addTab("Pen", penColorChooser);
         colorTabs.addTab("Fill", fillColorChooser);
@@ -214,14 +237,16 @@ public class GUI extends JFrame implements Runnable {
         c.anchor = GridBagConstraints.PAGE_START;
         pane.add(colorTabs,c);
 
-        // Add Panels
+        /*
+        ADD PANELS
+         */
 
+        // Left panel
         leftPanel = new JPanel();
         leftPanel.setBackground(Color.LIGHT_GRAY);
         setConstraints(leftPanel,0,0,2,5,0,0,c,pane);
 
-        setConstraints(mainPanel,2,0,1,5,1,1,c,pane);
-
+        // Right panel
         rightPanel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
@@ -231,6 +256,7 @@ public class GUI extends JFrame implements Runnable {
         rightPanel.setBackground(Color.LIGHT_GRAY);
         setConstraints(rightPanel,3,0,1,5,0,0,c,pane);
 
+        // Bottom panel
         bottomPanel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
@@ -240,6 +266,10 @@ public class GUI extends JFrame implements Runnable {
         bottomPanel.setBackground(Color.LIGHT_GRAY);
         setConstraints(bottomPanel,0,5,4,1,0,0,c,pane);
 
+        // Main drawing canvas panel
+        setConstraints(mainPanel,2,0,1,5,1,1,c,pane);
+
+        // Keep track of main drawing canvas panel size
         mainPanel.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent c) {
@@ -248,6 +278,8 @@ public class GUI extends JFrame implements Runnable {
             }
         });
 
+        // Drawing canvas mouse listener: Listens for clicks (plot and polygon),
+        // presses and releases (Line, rectangle, ellipse)
         mainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -278,7 +310,6 @@ public class GUI extends JFrame implements Runnable {
             }
             @Override
             public void mousePressed(MouseEvent e) {
-//                System.out.println("PRESS");
                 if(lineButton.isSelected()) {
                     Line.firstClick(e.getX()/dynamicWidth, e.getY()/dynamicHeight);
                 }
@@ -293,7 +324,6 @@ public class GUI extends JFrame implements Runnable {
             }
             @Override
             public void mouseReleased(MouseEvent e) {
-//                System.out.println("RELEASE");
                 if (lineButton.isSelected()) {
                     Shape.lineCommands.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
                 }
@@ -309,6 +339,18 @@ public class GUI extends JFrame implements Runnable {
         });
     }
 
+    /**
+     * Sets constraints of the panel component and adds it to the pane.
+     *
+     * @parem panel the component to add to the pane
+     * @parem gridx the x position
+     * @parem gridy the y position
+     * @parem gridwidth the width
+     * @parem gridheight the height
+     * @parem weightx x weighting
+     * @parem weighty y weighting
+     * @parem c the Grid Bag Constraints
+     */
     public static void setConstraints(JPanel panel, int gridx, int gridy, int gridwidth, int gridheight, int weightx, int weighty, GridBagConstraints c, Container pane) {
         c.fill = GridBagConstraints.BOTH;
         c.gridx = gridx;
@@ -320,13 +362,35 @@ public class GUI extends JFrame implements Runnable {
         pane.add(panel, c);
     }
 
+    /**
+     * When menu bar > 'File' > 'new' is clicked, clear the current list of VEC shapes and repaint the canvas blank.
+     * Fill toggle button is toggled to off.
+     * Pen color defaults to black.
+     *
+     */
     public void newButtonClick() {
         Shape.lineCommands.clear();
+        resetFillButton();
+    }
+
+    /**
+     * Untoggles Fill button, and updates text to "Fill: Off".
+     *
+     */
+    public void resetFillButton() {
+        fillToggleButton.setSelected(false);
+        fillToggleButton.setText("Fill: Off");
         revalidate();
         repaint();
     }
 
-    //Container pane
+    /**
+     * When menu bar > 'File' > 'open' is clicked, opens up a file chooser. Files with extension
+     * '.VEC' are filtered for. When the file is selected, overwrite the current VEC shape file
+     * with the target file, and immediately show on the drawing canvas. Fill and pen color
+     * configuration is maintained from the open file.
+     *
+     */
     public void openButtonClick() {
         JFileChooser fileChooser = new JFileChooser();
         // Creates filter for VEC files, adds the filter to the open event and sets the filter as the default file type.
@@ -340,6 +404,13 @@ public class GUI extends JFrame implements Runnable {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 FileReaderClass.open(selectedFile.getPath());
+                if (Colors.isFillOn) {
+                    fillToggleButton.setSelected(true);
+                    fillToggleButton.setText("Fill: On");
+                }
+                if (!Colors.isFillOn) {
+                    resetFillButton();
+                }
                 revalidate();
                 repaint();
             }
@@ -348,6 +419,12 @@ public class GUI extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * When menu bar > 'File' > 'save' is clicked, opens up a file chooser. Files with extension
+     * '.VEC' are filtered for. When the file name is specified, save the current VEC shape file
+     * to the target file. The extension ".VEC" is added automatically.
+     *
+     */
     public void saveButtonClick() {
         // set file filter
         JFileChooser fileChooser = new JFileChooser();
@@ -382,12 +459,21 @@ public class GUI extends JFrame implements Runnable {
 
 class drawingPanel extends JPanel {
 
+    /**
+     * Sets default size to 300x300 and adds a Gray line border.
+     *
+     */
     public drawingPanel() {
         setSize(300,300);
         setBorder(new LineBorder(Color.GRAY));
         setVisible(true);
     }
 
+    /**
+     * Sets the size of the drawing panel to be the maximum possible square size of available space.
+     * Iterates over each VEC shape command and draws to screen.
+     *
+     */
     public void paintComponent(Graphics graphics) {
         Graphics2D g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

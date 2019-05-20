@@ -19,6 +19,7 @@ public class Fill implements Shape {
             int bb = Integer.parseInt(s[1].substring(5,7), 16);
             this.color = new Color(rr, gg, bb);
         }
+        Colors.setIsFillOn(fill);
     }
 
     @Override

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
+import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
@@ -81,6 +82,7 @@ public class GUI extends JFrame implements Runnable {
         JTabbedPane colorTabs;
 
         mainPanel = new drawingPanel();
+        fillColorChooser = new JColorChooser();
 
         // Add buttons
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -123,7 +125,7 @@ public class GUI extends JFrame implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 try {Shape.lineCommands.removeLast(); }
                 catch (Exception undoException) {
-                    
+
                 }
                 revalidate();
                 repaint();
@@ -134,6 +136,23 @@ public class GUI extends JFrame implements Runnable {
         pane.add(undoButton, c);
 
         fillToggleButton = new JToggleButton("Fill: Off");
+        fillToggleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (fillToggleButton.isSelected()) {
+                    Color newFillColor = fillColorChooser.getColor();
+                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                    fillToggleButton.setText("Fill: On");
+                }
+                else if (!fillToggleButton.isSelected()) {
+                    Shape.lineCommands.add(new Fill("FILL OFF"));
+                    fillToggleButton.setText("Fill: Off");
+                }
+                revalidate();
+                repaint();
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 3;
@@ -155,8 +174,16 @@ public class GUI extends JFrame implements Runnable {
                 penColorChooser.removeChooserPanel(accp);
             }
         }
+        ColorSelectionModel penModel = penColorChooser.getSelectionModel();
+        ChangeListener changeListenerPen = new ChangeListener() {
+            public void stateChanged(ChangeEvent changeEvent) {
+                Color newPenColor = penColorChooser.getColor();
+                String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+                Shape.lineCommands.add(new Pen("PEN " + hex));
+            }
+        };
+        penModel.addChangeListener(changeListenerPen);
 
-        fillColorChooser = new JColorChooser();
         fillColorChooser.setPreviewPanel(new JPanel()); // removes the preview panel
         AbstractColorChooserPanel[] panels2 = fillColorChooser.getChooserPanels();
         for (AbstractColorChooserPanel accp : panels2) { // remove other tabs
@@ -164,6 +191,18 @@ public class GUI extends JFrame implements Runnable {
                 fillColorChooser.removeChooserPanel(accp);
             }
         }
+        ColorSelectionModel fillModel = fillColorChooser.getSelectionModel();
+        ChangeListener changeListenerFill = new ChangeListener() {
+            public void stateChanged(ChangeEvent changeEvent) {
+                if (fillToggleButton.isSelected()) {
+                    Color newFillColor = fillColorChooser.getColor();
+                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                }
+            }
+        };
+        fillModel.addChangeListener(changeListenerFill);
+
 
         colorTabs = new JTabbedPane();
         colorTabs.addTab("Pen", penColorChooser);
@@ -355,6 +394,7 @@ class drawingPanel extends JPanel {
         int size = Math.min(getWidth(), getHeight());
         setSize(size, size);
         g.setColor(Color.BLACK);
+        Colors.setPenColor(Color.BLACK);
         Colors.setIsFillOn(false);
         for (Shape shape : Shape.lineCommands) {
             shape.drawShape(g, size);

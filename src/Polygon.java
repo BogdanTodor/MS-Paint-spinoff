@@ -9,6 +9,9 @@ public class Polygon implements Shape {
     double[] ycoords;
     double[] xcoordsScaled;
     double[] ycoordsScaled;
+    static double[] ClickCoordsX = new double[100];
+    static double[] ClickCoordsY = new double[100];
+    static int clickCount = 0;
     String inputString;
 
     Polygon( String input) {
@@ -53,5 +56,17 @@ public class Polygon implements Shape {
     @Override
     public String toString() {
         return inputString;
+    }
+
+    public static void addClick() {
+        clickCount++;
+    }
+
+    public static int getClickCount() {
+        return clickCount;
+    }
+
+    public static void resetClickCount() {
+        clickCount = 0;
     }
 }

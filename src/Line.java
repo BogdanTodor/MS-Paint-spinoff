@@ -5,6 +5,7 @@ public class Line implements Shape {
     
     double[] coords = new double[4];
     double[] coordsScaled = new double [4];
+    static double[] firstClickCoords = new double[2];
     String inputString;
 
     Line( String input) {
@@ -43,5 +44,16 @@ public class Line implements Shape {
     public double gety2() {
         return coordsScaled[3];
     }
+
+    public static void firstClick(double x1, double y1) {
+        firstClickCoords[0] = x1;
+        firstClickCoords[1] = y1;
+    }
+
+    public static double getFirstClickX() {
+        return firstClickCoords[0];
+    }
+
+    public static double getFirstClickY() { return firstClickCoords[1]; }
 
 }

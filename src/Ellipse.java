@@ -10,6 +10,7 @@ public class Ellipse extends Ellipse2D  implements Shape{
     String inputString;
     double[] coords = new double[4];
     double[] coordsScaled = new double [4];
+    static double[] firstClickCoords = new double[2];
 
     Ellipse(String input) {
         inputString = input;
@@ -51,6 +52,17 @@ public class Ellipse extends Ellipse2D  implements Shape{
     public double getHeight() {
         return coordsScaled[3]-coordsScaled[1];
     }
+
+    public static void firstClick(double x1, double y1) {
+        firstClickCoords[0] = x1;
+        firstClickCoords[1] = y1;
+    }
+
+    public static double getFirstClickX() {
+        return firstClickCoords[0];
+    }
+
+    public static double getFirstClickY() { return firstClickCoords[1]; }
 
     @Override
     public boolean isEmpty() {

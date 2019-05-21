@@ -6,10 +6,16 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Scanner;
 
+/** Used to construct string representation of shapes from array elements, open files and save files. */
 public class FileReaderClass {
+
 
     public static String input;
 
+
+    /** Extract each element from the input array and save them as a string.
+     * @param Array The array of elements to be extracted and saved as a string.
+     * @return The string constructed from the elements of the input array.*/
     public static String stringExtractor(String Array[]){
         input = "";
         for(int wordPosition = 0; wordPosition < Array.length; wordPosition++){
@@ -18,6 +24,8 @@ public class FileReaderClass {
         return input;
     }
 
+    /** Opens the selected VEC formatted file and loads the commands stored within the file.
+     * @param path The path of the file to be opened.*/
     public static void open(String path)throws Exception{
         File file = new File(path);
 
@@ -56,7 +64,8 @@ public class FileReaderClass {
         filecontent.close();
     }
 
-
+    /** Saves the current canvas and drawing data as a VEC formatted file.
+     * @param SaveLocation The path to the save location of the file.*/
     public static void save(String SaveLocation) throws Exception {
         PrintWriter out = new PrintWriter(SaveLocation);
 

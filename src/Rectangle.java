@@ -8,11 +8,21 @@ import static java.lang.Double.parseDouble;
 
 public class Rectangle extends Rectangle2D implements Shape {
 
+    /** The string used to parse the mouse position into the rectangle shape.*/
     String inputString;
+
+    /** Stores the input string broken into two pairs of raw x,y coordinates.*/
     double[] coords = new double[4];
+
+    /** Stores the pair of x,y coordinates stores in coords scaled according to the canvas resolution
+     * such that the values lie between 0 and 1.*/
     double[] coordsScaled = new double [4];
+
+    /** Stores position of the initial mouse click*/
     static double[] firstClickCoords = new double[2];
 
+    /** Recieves the position of the mouse clicks, splits them and populates the coords array
+     * @param input The raw position of each mouse click registered by the rectangle shape function*/
     Rectangle( String input) {
         inputString = input;
         String s[] = input.split(" ");
@@ -21,6 +31,9 @@ public class Rectangle extends Rectangle2D implements Shape {
         }
     }
 
+    /** Draws the rectangle shape, sets the fill setting on or off and sets the colour.
+     * @param size The size.
+     * @param g The graphics engine.*/
     @Override
     public void drawShape(Graphics2D g, int size) {
         for (int i = 0; i < coordsScaled.length; i++) {
@@ -38,21 +51,25 @@ public class Rectangle extends Rectangle2D implements Shape {
         g.setColor(Colors.getPenColor()); // set color back to pen color for other shapes
     }
 
+    /**@return The string representation of the rectangle shape.*/
     @Override
     public String toString() {
         return inputString;
     }
 
+    /** @return The horizontal position of the first mouse click.*/
     @Override
     public double getX() {
         return coordsScaled[0];
     }
 
+    /** @return The vertical position of the first mouse click.*/
     @Override
     public double getY() {
         return coordsScaled[1];
     }
 
+    /** @return The vertical position of the second mouse click.*/
     public double getX2() {
         return coordsScaled[2];
     }

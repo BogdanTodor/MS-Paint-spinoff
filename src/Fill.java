@@ -1,11 +1,18 @@
 import java.awt.*;
 
+/** Used to fill hollow shapes with colour. */
 public class Fill implements Shape {
 
+    /** The colour of the fill or pen fill.*/
     public Color color;
+    /** The state of whether or not fill is on or off*/
     public Boolean fill;
+    /** The mouse click position expressed as x,y coordinate pairs*/
     String inputString ;
 
+    /** Fills the inside portion of the shape with colour if the fill instruction is declared on the gui or in an
+     * opened file.
+     * @param input The string representation of a shape object*/
     Fill (String input) {
         inputString = input;
         String s[] = input.split(" ");
@@ -22,12 +29,17 @@ public class Fill implements Shape {
         Colors.setIsFillOn(fill);
     }
 
+    /** Sets fill to false and the colour to what the user has chosen.
+     * @param g The graphics engine used.
+     * @param size The size.
+     * */
     @Override
     public void drawShape(Graphics2D g, int size) {
         Colors.setIsFillOn(fill);
         Colors.setFillColor(this.color);
     }
 
+    /** return The string representation of the fill input instructions*/
     @Override
     public String toString() {
         return inputString;

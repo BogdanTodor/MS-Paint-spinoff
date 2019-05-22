@@ -12,13 +12,25 @@ import java.io.File;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/** Used to construct the GUI, assign button functionality */
 public class GUI extends JFrame implements Runnable {
 
+    /** Instance of a menu bar*/
     JMenuBar menuBar;
+
+    /** Instance of a toggle button*/
     JToggleButton fillToggleButton;
+
+    /** The initial width of the GUI.*/
     public static final int WIDTH = 460;
+
+    /** The initial height of the GUI.*/
     public static final int HEIGHT = 470;
+
+    /** Stores the resizeable width of the GUI.*/
     public static double dynamicWidth;
+
+    /** Stores the resizeable height of the GUI.*/
     public static double dynamicHeight;
 
     /**
@@ -210,18 +222,6 @@ public class GUI extends JFrame implements Runnable {
         c.gridy = 4;
         pane.add(gridButton, c);
 
-//        c.gridwidth = 1;
-//        JLabel gridSizeLabel = new JLabel("     Grid size:");
-//        c.gridx = 0;
-//        c.gridy = 5;
-//        pane.add(gridSizeLabel, c);
-//
-//        JTextField gridSizeField = new JTextField(5);
-//        c.gridx = 1;
-//        c.gridy = 5;
-//        c.fill = GridBagConstraints.NONE;
-//        pane.add(gridSizeField, c);
-
         /*
         ADD COLOR CHOOSERS
          */
@@ -400,7 +400,7 @@ public class GUI extends JFrame implements Runnable {
         pane.add(panel, c);
     }
 
-
+    /** Prompts user to enter an appropriate grid size.*/
     public static void editGridSize() {
         String input = JOptionPane.showInputDialog(null, "Enter grid size ranging from 0 to 0.5");
         System.out.println(input);
@@ -417,10 +417,7 @@ public class GUI extends JFrame implements Runnable {
         resetFillButton();
     }
 
-    /**
-     * Untoggles Fill button, and updates text to "Fill: Off".
-     *
-     */
+    /** Untoggles Fill button, and updates text to "Fill: Off". */
     public void resetFillButton() {
         fillToggleButton.setSelected(false);
         fillToggleButton.setText("Fill: Off");
@@ -467,7 +464,6 @@ public class GUI extends JFrame implements Runnable {
      * When menu bar > 'File' > 'save' is clicked, opens up a file chooser. Files with extension
      * '.VEC' are filtered for. When the file name is specified, save the current VEC shape file
      * to the target file. The extension ".VEC" is added automatically.
-     *
      */
     public void saveButtonClick() {
         // set file filter
@@ -503,11 +499,13 @@ public class GUI extends JFrame implements Runnable {
 //        }
 //    }
 
+    /** Calls the method which creates the GUI.*/
     @Override
     public void run() {
         createAndShowGUI();
     }
 
+    /** The main method which instantiates the GUI.*/
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new GUI());
     }
@@ -515,10 +513,7 @@ public class GUI extends JFrame implements Runnable {
 
 class drawingPanel extends JPanel {
 
-    /**
-     * Sets default size to 300x300 and adds a Gray line border.
-     *
-     */
+    /** Sets default size to 300x300 and adds a Gray line border.*/
     public drawingPanel() {
         setSize(300,300);
         setBorder(new LineBorder(Color.GRAY));

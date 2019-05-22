@@ -69,40 +69,49 @@ public class Rectangle extends Rectangle2D implements Shape {
         return coordsScaled[1];
     }
 
-    /** @return The vertical position of the second mouse click.*/
+    /** @return The horizontal position of the second mouse click.*/
     public double getX2() {
         return coordsScaled[2];
     }
 
+    /** @return The vertical position of the second mouse click.*/
     public double getY2() {
         return coordsScaled[3];
     }
 
+    /** @return The width of the rectangle.*/
     @Override
     public double getWidth() {
         return coordsScaled[2] - coordsScaled[0];
     }
 
+    /** @return  The height of the rectangle.*/
     @Override
     public double getHeight() {
         return coordsScaled[3] - coordsScaled[1];
     }
 
+    /** Assigns the x and y coordinates of the first mouse click.
+     * @param x1 The horizontal position of the mouse click.
+     * @param y1 The vertical position of the mouse click.*/
     public static void firstClick(double x1, double y1) {
         firstClickCoords[0] = x1;
         firstClickCoords[1] = y1;
     }
 
+    /** @return The horizontal position of the first mouse click.*/
     public static double getFirstClickX() {
         return firstClickCoords[0];
     }
 
+    /** @return The vertical position of the first mouse click.*/
     public static double getFirstClickY() { return firstClickCoords[1]; }
 
     // Following methods not used, but required to override to extend Rectangle2D
+
+
     @Override
     public void setRect(double x, double y, double w, double h) {
-
     }
 
     @Override

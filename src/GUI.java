@@ -10,6 +10,10 @@ import java.awt.event.*;
 import java.io.File;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.LinkedList;
+
 import static java.lang.Double.max;
 import static java.lang.Math.min;
 
@@ -91,6 +95,135 @@ public class GUI extends JFrame implements Runnable {
         });
         menu.add(menuItem);
 
+        menuItem = new JMenuItem("Browse history");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPopupMenu popup = new JPopupMenu();
+
+                ActionListener menuListener = new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        Shape shape = null;
+                        String vecItem = event.getActionCommand();
+                        String[] splitted = vecItem.split(" ");
+                        // Display output of the read lines.
+
+                        if (splitted[0].equals("LINE")) {
+                            shape = new Line(vecItem);
+                        }
+                        else if (splitted[0].equals("PLOT")) {
+                            shape = new Plot(vecItem);
+                        }
+                        else if (splitted[0].equals("RECTANGLE")) {
+                            shape = new Rectangle(vecItem);
+                        }
+                        else if (splitted[0].equals("PEN")) {
+                            shape = new Pen(vecItem);
+                        }
+                        else if (splitted[0].equals("FILL")) {
+                            shape = new Fill(vecItem);
+                        }
+                        else if (splitted[0].equals("ELLIPSE")) {
+                            shape = new Ellipse(vecItem);
+                        }
+                        else if (splitted[0].equals("POLYGON")) {
+                            shape = new Polygon(vecItem);
+                        }
+
+                        int index = Integer.MAX_VALUE;
+                        for (int i = 0; i < Shape.lineCommands.size(); i++) {
+                            if (shape.toString() == Shape.lineCommands.get(i).toString())
+                            {
+                                index = i;
+                                System.out.println(i);
+                                break;
+                            }
+                        }
+                        while(Shape.lineCommands.size() > index+1) {
+                            Shape.deletedLineCommands.add(Shape.lineCommands.get(index+1));
+                            Shape.lineCommands.remove(index+1);
+                        }
+                        revalidate();
+                        repaint();
+                    }
+                };
+                for (int i = Shape.lineCommands.size(); i-- > 0; ) {
+                    JMenuItem item = new JMenuItem(Shape.lineCommands.get(i).toString());
+                    popup.add(item);
+                    item.addActionListener(menuListener);
+                }
+                popup.show(getContentPane(), 10, 50);
+                // End
+            }
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Recover changes");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LinkedList<Shape> lineCommandsOriginal;
+                JPopupMenu popup = new JPopupMenu();
+                ActionListener menuListener = new ActionListener() {
+                    public void actionPerformed(ActionEvent event) {
+                        Shape shape = null;
+                        String vecItem = event.getActionCommand();
+                        String[] splitted = vecItem.split(" ");
+                        // Display output of the read lines.
+
+                        if (splitted[0].equals("LINE")) {
+                            shape = new Line(vecItem);
+                        }
+                        else if (splitted[0].equals("PLOT")) {
+                            shape = new Plot(vecItem);
+                        }
+                        else if (splitted[0].equals("RECTANGLE")) {
+                            shape = new Rectangle(vecItem);
+                        }
+                        else if (splitted[0].equals("PEN")) {
+                            shape = new Pen(vecItem);
+                        }
+                        else if (splitted[0].equals("FILL")) {
+                            shape = new Fill(vecItem);
+                        }
+                        else if (splitted[0].equals("ELLIPSE")) {
+                            shape = new Ellipse(vecItem);
+                        }
+                        else if (splitted[0].equals("POLYGON")) {
+                            shape = new Polygon(vecItem);
+                        }
+
+                        int index = Integer.MAX_VALUE;
+                        for (int i = 0; i < Shape.deletedLineCommands.size(); i++) {
+                            if (shape.toString() == Shape.deletedLineCommands.get(i).toString())
+                            {
+                                index = i;
+                                System.out.println(i);
+                                break;
+                            }
+                        }
+                        for(int i = index; i>=0; i--) {
+                            System.out.println(i);
+                            System.out.println(Shape.deletedLineCommands.get(i).toString());
+                            Shape temp = Shape.deletedLineCommands.get(i);
+                            Shape.lineCommands.add(temp);
+                            Shape.deletedLineCommands.remove(temp);
+                        }
+                        revalidate();
+                        repaint();
+                    }
+                };
+                for (int i = Shape.deletedLineCommands.size(); i-- > 0; ) {
+                    JMenuItem item = new JMenuItem(Shape.deletedLineCommands.get(i).toString());
+                    popup.add(item);
+                    item.addActionListener(menuListener);
+                }
+                popup.show(getContentPane(), 10, 50);
+                // End
+            }
+        });
+        menu.add(menuItem);
+
         menu = new JMenu("Edit");
         menuBar.add(menu);
 
@@ -99,6 +232,34 @@ public class GUI extends JFrame implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editGridSize();
+            }
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Pen color");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color newPenColor = JColorChooser.showDialog(GUI.this, "Select Pen Color", Color.BLACK);
+                if (newPenColor != null) {
+                    String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+                    Shape.lineCommands.add(new Pen("PEN " + hex));
+                }
+            }
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Fill color");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color newFillColor = JColorChooser.showDialog(GUI.this, "Select Fill Color", Color.BLACK);
+                if (newFillColor != null) {
+                    fillToggleButton.setSelected(true);
+                    fillToggleButton.setText("Fill: On");
+                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                }
             }
         });
         menu.add(menuItem);
@@ -394,8 +555,10 @@ public class GUI extends JFrame implements Runnable {
         mainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                double x = round(e.getX()/dynamicWidth,2);
+                double y = round(e.getY()/dynamicHeight,2);
                 if(plotButton.isSelected()) {
-                    Shape.lineCommands.add(new Plot("PLOT "+e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+                    Shape.lineCommands.add(new Plot("PLOT "+x+" "+y));
                 }
                 if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1 && polyButton.isSelected()) {
                     System.out.println("Right CLICK");
@@ -410,10 +573,10 @@ public class GUI extends JFrame implements Runnable {
 
                 }
                 else if(polyButton.isSelected()) {
-                    System.out.println("Clicked " +e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight);
+                    System.out.println("Clicked " +x+" "+y);
                     System.out.println("Click count " + Polygon.getClickCount());
-                    Polygon.ClickCoordsX[Polygon.getClickCount()] = e.getX()/dynamicWidth;
-                    Polygon.ClickCoordsY[Polygon.getClickCount()] = e.getY()/dynamicHeight;
+                    Polygon.ClickCoordsX[Polygon.getClickCount()] = x;
+                    Polygon.ClickCoordsY[Polygon.getClickCount()] = y;
                     Polygon.addClick();
                 }
                 revalidate();
@@ -421,22 +584,24 @@ public class GUI extends JFrame implements Runnable {
             }
             @Override
             public void mousePressed(MouseEvent e) {
+                double x1 = round(e.getX()/dynamicWidth,2);
+                double y1 = round(e.getY()/dynamicHeight,2);
                 if(lineButton.isSelected()) {
-                    Line.firstClick(e.getX()/dynamicWidth, e.getY()/dynamicHeight);
+                    Line.firstClick(x1, y1);
                 }
                 else if(rectangleButton.isSelected()) {
-                    Rectangle.firstClick(e.getX()/dynamicWidth, e.getY()/dynamicHeight);
+                    Rectangle.firstClick(x1, y1);
                 }
                 else if(ellipseButton.isSelected()) {
-                    Ellipse.firstClick(e.getX()/dynamicWidth, e.getY()/dynamicHeight);
+                    Ellipse.firstClick(x1, y1);
                 }
                 revalidate();
                 repaint();
             }
             @Override
             public void mouseReleased(MouseEvent e) {
-                double x2 = e.getX()/dynamicWidth;
-                double y2 = e.getY()/dynamicHeight;
+                double x2 = round(e.getX()/dynamicWidth,2);
+                double y2 = round(e.getY()/dynamicHeight,2);
                 if (lineButton.isSelected()) {
                     Shape.lineCommands.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
                 }
@@ -501,16 +666,6 @@ public class GUI extends JFrame implements Runnable {
             // UNDO support: On Mac = cmd-z, on Windows = ctrl-z
             i.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), UNDO);
         }
-    }
-
-    /** Removes the last VEC command drawn on screen or opened from file. */
-    public void undo() {
-        try {Shape.lineCommands.removeLast(); }
-        catch (Exception undoException) {
-
-        }
-        revalidate();
-        repaint();
     }
 
 //    /** Display user controls on left panel. Adapts to current selected control. */
@@ -610,6 +765,43 @@ public class GUI extends JFrame implements Runnable {
 //            gridButton.setText("Grid: On");
 //        }
 //    }
+
+    /**
+     * Helper function to round coordinates on the drawing canvas to 2 decimal places
+     * @param value
+     * @param places
+     * @return
+     */
+    public static double round(double value, int places) {
+        BigDecimal bd = new BigDecimal(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+    /** Removes the last VEC command drawn on screen or opened from file. */
+    public void undo() {
+        try {Shape.lineCommands.removeLast(); }
+        catch (Exception undoException) {
+        }
+        revalidate();
+        repaint();
+    }
+
+    /**
+     * Undo History Support: brings up a list containing the history of drawing
+     * commands for that image, allowing the user to step back and forth through
+     * the creation of that image
+     */
+    public void undoHistory() {
+        new historyPopup(this);
+        revalidate();
+        repaint();
+    }
+
+    public void refresh() {
+        this.revalidate();
+        this.repaint();
+    }
 
     /** Calls the method which creates the GUI.*/
     @Override

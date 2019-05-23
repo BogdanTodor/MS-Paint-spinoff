@@ -5,6 +5,7 @@ import java.util.LinkedList;
 public interface Shape {
     /** Linkedlist to store the instructions of each shape. Contains the type of shape and the coordinates to draw it.*/
     public static LinkedList<Shape> lineCommands = new LinkedList<>();
+    public static LinkedList<Shape> deletedLineCommands = new LinkedList<>();
 
     /** @param size The size.
      * @param g The graphics engine.*/

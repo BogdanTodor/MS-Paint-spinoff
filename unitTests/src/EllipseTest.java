@@ -52,4 +52,21 @@ public class EllipseTest{
         assertEquals(ellipse.getBounds2D(), null);
     }
 
+    @Test
+    public void getWidthTest(){
+        assertEquals(ellipse.getWidth(), scaledPositions[2]-scaledPositions[0]);
+    }
+
+    @Test
+    public void getHeightTest(){
+        assertEquals(ellipse.getHeight(), scaledPositions[3]-scaledPositions[1]);
+    }
+
+    @Test
+    public void getFirstClickXTest(){
+        double firstClickXPosition = ellipse.getX();
+        ellipse.firstClick(firstClickXPosition,ellipse.getY());
+        assertEquals(ellipse.getFirstClickX(), ellipse.getX());
+    }
+
 }

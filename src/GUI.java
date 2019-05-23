@@ -17,6 +17,7 @@ public class GUI extends JFrame implements Runnable {
 
     /** Instance of a menu bar*/
     JMenuBar menuBar;
+    JPanel mainPanel;
 
     /** Instance of a toggle button*/
     JToggleButton fillToggleButton;
@@ -44,6 +45,7 @@ public class GUI extends JFrame implements Runnable {
 
         addComponentsToPane(getContentPane());
         setJMenuBar(createMenuBar());
+        setupKeyBindings();
 
         repaint();
         this.setVisible(true);
@@ -114,7 +116,8 @@ public class GUI extends JFrame implements Runnable {
         // Setup layout and components
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        JPanel mainPanel, leftPanel, rightPanel, bottomPanel;
+//        JPanel mainPanel, leftPanel, rightPanel, bottomPanel;
+        JPanel leftPanel, rightPanel, bottomPanel;
         JButton undoButton;
         ButtonGroup drawingButtons = new ButtonGroup();
         JToggleButton plotButton, lineButton, rectangleButton, ellipseButton, polyButton, gridButton;
@@ -166,12 +169,7 @@ public class GUI extends JFrame implements Runnable {
         undoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {Shape.lineCommands.removeLast(); }
-                catch (Exception undoException) {
-
-                }
-                revalidate();
-                repaint();
+                undo();
             }
         });
         c.gridx = 0;
@@ -406,6 +404,38 @@ public class GUI extends JFrame implements Runnable {
         System.out.println(input);
     }
 
+    /** Setup key bindings */
+    public void setupKeyBindings() {
+        String UNDO = "Undo action key";
+        Action undoAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                undo();
+            }
+        };
+
+        mainPanel.getActionMap().put(UNDO, undoAction);
+
+        InputMap[] inputMaps = new InputMap[] {
+                mainPanel.getInputMap(JComponent.WHEN_FOCUSED),
+                mainPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT),
+                mainPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW),
+        };
+        for(InputMap i : inputMaps) {
+            // UNDO support: On Mac = cmd-z, on Windows = ctrl-z
+            i.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), UNDO);
+        }
+    }
+
+    /** Removes the last VEC command drawn on screen or opened from file. */
+    public void undo() {
+        try {Shape.lineCommands.removeLast(); }
+        catch (Exception undoException) {
+
+        }
+        revalidate();
+        repaint();
+    }
+
     /**
      * When menu bar > 'File' > 'new' is clicked, clear the current list of VEC shapes and repaint the canvas blank.
      * Fill toggle button is toggled to off.
@@ -435,7 +465,7 @@ public class GUI extends JFrame implements Runnable {
     public void openButtonClick() {
         JFileChooser fileChooser = new JFileChooser();
         // Creates filter for VEC files, adds the filter to the open event and sets the filter as the default file type.
-        FileFilter VECFilter = new FilterFileType(".VEC", "VEC Documents");
+        FileFilter VECFilter = new FilterFileType(".vec", "VEC Documents");
         fileChooser.addChoosableFileFilter(VECFilter);
         fileChooser.setFileFilter(VECFilter);
 
@@ -469,7 +499,7 @@ public class GUI extends JFrame implements Runnable {
         // set file filter
         JFileChooser fileChooser = new JFileChooser();
 
-        FileFilter VECFilter = new FilterFileType(".VEC", "VEC Documents");
+        FileFilter VECFilter = new FilterFileType(".vec", "VEC Documents");
         fileChooser.addChoosableFileFilter(VECFilter);
         fileChooser.setFileFilter(VECFilter);
 
@@ -478,7 +508,7 @@ public class GUI extends JFrame implements Runnable {
         {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                FileReaderClass.save(selectedFile.getPath()+".VEC");
+                FileReaderClass.save(selectedFile.getPath()+".vec");
                 revalidate();
                 repaint();
             }

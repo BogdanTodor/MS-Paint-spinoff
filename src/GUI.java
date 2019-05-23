@@ -5,12 +5,13 @@ import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.metal.MetalToggleButtonUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import static java.lang.Double.max;
+import static java.lang.Math.min;
 
 /** Used to construct the GUI, assign button functionality */
 public class GUI extends JFrame implements Runnable {
@@ -129,36 +130,110 @@ public class GUI extends JFrame implements Runnable {
         fillColorChooser = new JColorChooser();
 
         /*
+        ADD JLABELS
+         */
+//        JLabel polyhelp =new JLabel("Polygon: Left-click to place points.\n Right click to finish");
+        JLabel[] labels = new JLabel[5];
+        JLabel plotHelp = new JLabel("<html>Plot tool tips:<br/>Click left mouse button<br/>to place point.</html>", SwingConstants.CENTER);
+        JLabel lineHelp = new JLabel("<html>Line tool tips:<br/>Press left mouse button, <br/>drag and release to place.</html>", SwingConstants.CENTER);
+        JLabel ellipseHelp = new JLabel("<html>Ellipse tool tips:<br/>Press left mouse button, <br/>drag and release to place.</html>", SwingConstants.CENTER);
+        JLabel rectangleHelp = new JLabel("<html>Rectangle tool tips:<br/>Press left mouse button, <br/>drag and release to place.</html>", SwingConstants.CENTER);
+        JLabel polyHelp = new JLabel("<html>Polygon tool tips:<br/>Left-click to place points.<br/>Right click to connect.</html>", SwingConstants.CENTER);
+        labels[0] = (plotHelp);
+        labels[1] = (lineHelp);
+        labels[2] = (ellipseHelp);
+        labels[3] = (rectangleHelp);
+        labels[4] = (polyHelp);
+        Font f = new Font("Ariel",Font.PLAIN,12);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.PAGE_START;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 5;
+        for (int i = 0; i < labels.length; i++) {
+            labels[i].setFont(f);
+            labels[i].setVisible(false);
+            pane.add(labels[i], c);
+            pane.add(labels[i], c);
+        }
+
+        /*
         ADD BUTTONS
          */
-        c.fill = GridBagConstraints.HORIZONTAL;
+//        c.fill = GridBagConstraints.HORIZONTAL;
 
         plotButton = new JToggleButton("Plot");
+        plotButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JLabel label : labels) {
+                    label.setVisible(false);
+                }
+                plotHelp.setVisible(plotButton.isSelected());
+            }
+        });
         c.anchor = GridBagConstraints.PAGE_START;
+        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 0;
         drawingButtons.add(plotButton);
         pane.add(plotButton, c);
 
         lineButton = new JToggleButton("Line");
+        lineButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JLabel label : labels) {
+                    label.setVisible(false);
+                }
+                lineHelp.setVisible(lineButton.isSelected());
+            }
+        });
         c.gridx = 0;
         c.gridy = 1;
         drawingButtons.add(lineButton);
         pane.add(lineButton, c);
 
         rectangleButton = new JToggleButton("Rectangle");
+        rectangleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JLabel label : labels) {
+                    label.setVisible(false);
+                }
+                rectangleHelp.setVisible(rectangleButton.isSelected());
+            }
+        });
         c.gridx = 1;
         c.gridy = 0;
         drawingButtons.add(rectangleButton);
         pane.add(rectangleButton, c);
 
         polyButton = new JToggleButton(" Polygon ");
+        polyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JLabel label : labels) {
+                    label.setVisible(false);
+                }
+                polyHelp.setVisible(polyButton.isSelected());
+            }
+        });
         c.gridx = 1;
         c.gridy = 1;
         drawingButtons.add(polyButton);
         pane.add(polyButton, c);
 
         ellipseButton = new JToggleButton("Ellipse");
+        ellipseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (JLabel label : labels) {
+                    label.setVisible(false);
+                }
+                ellipseHelp.setVisible(ellipseButton.isSelected());
+            }
+        });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
         c.gridy = 2;
@@ -360,14 +435,16 @@ public class GUI extends JFrame implements Runnable {
             }
             @Override
             public void mouseReleased(MouseEvent e) {
+                double x2 = e.getX()/dynamicWidth;
+                double y2 = e.getY()/dynamicHeight;
                 if (lineButton.isSelected()) {
-                    Shape.lineCommands.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+                    Shape.lineCommands.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
                 }
                 else if (rectangleButton.isSelected()) {
-                    Shape.lineCommands.add(new Rectangle("RECTANGLE "+ Rectangle.getFirstClickX()+ " " + Rectangle.getFirstClickY() + " " +e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+                    Shape.lineCommands.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
                 }
                 else if (ellipseButton.isSelected()) {
-                    Shape.lineCommands.add(new Ellipse("ELLIPSE "+ Ellipse.getFirstClickX()+ " " + Ellipse.getFirstClickY() + " " +e.getX()/dynamicWidth+" "+e.getY()/dynamicHeight));
+                    Shape.lineCommands.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
                 }
                 revalidate();
                 repaint();
@@ -435,6 +512,11 @@ public class GUI extends JFrame implements Runnable {
         revalidate();
         repaint();
     }
+
+//    /** Display user controls on left panel. Adapts to current selected control. */
+//    public void userControls() {
+//        Jlabel
+//    }
 
     /**
      * When menu bar > 'File' > 'new' is clicked, clear the current list of VEC shapes and repaint the canvas blank.
@@ -558,7 +640,7 @@ class drawingPanel extends JPanel {
     public void paintComponent(Graphics graphics) {
         Graphics2D g = (Graphics2D) graphics;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        int size = Math.min(getWidth(), getHeight());
+        int size = min(getWidth(), getHeight());
         setSize(size, size);
         g.setColor(Color.BLACK);
         Colors.setPenColor(Color.BLACK);

@@ -103,6 +103,34 @@ public class GUI extends JFrame implements Runnable {
         });
         menu.add(menuItem);
 
+        menuItem = new JMenuItem("Pen color");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color newPenColor = JColorChooser.showDialog(GUI.this, "Select Pen Color", Color.BLACK);
+                if (newPenColor != null) {
+                    String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+                    Shape.lineCommands.add(new Pen("PEN " + hex));
+                }
+            }
+        });
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Fill color");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Color newFillColor = JColorChooser.showDialog(GUI.this, "Select Fill Color", Color.BLACK);
+                if (newFillColor != null) {
+                    fillToggleButton.setSelected(true);
+                    fillToggleButton.setText("Fill: On");
+                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                }
+            }
+        });
+        menu.add(menuItem);
+
         return menuBar;
     }
 

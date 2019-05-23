@@ -167,10 +167,12 @@ public class GUI extends JFrame implements Runnable {
         menuItem = new JMenuItem("Pen color");
         menuItem.addActionListener(e -> {
             Color newPenColor = JColorChooser.showDialog(GUI.this, "Select Pen Color", Color.BLACK);
-            if (newPenColor != null) {
-                String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
-                Shape.lineCommands.add(new Pen("PEN " + hex));
-            }
+            try {
+                if (newPenColor != null) {
+                    String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+                    Shape.lineCommands.add(new Pen("PEN " + hex));
+                }
+            }catch(ShapeException z){}
         });
         menu.add(menuItem);
 
@@ -346,13 +348,18 @@ public class GUI extends JFrame implements Runnable {
                 penColorChooser.removeChooserPanel(accp);
             }
         }
+
         ColorSelectionModel penModel = penColorChooser.getSelectionModel();
         ChangeListener changeListenerPen = changeEvent -> {
-            Color newPenColor = penColorChooser.getColor();
-            String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
-            Shape.lineCommands.add(new Pen("PEN " + hex));
+            try {
+                Color newPenColor = penColorChooser.getColor();
+                String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+                Shape.lineCommands.add(new Pen("PEN " + hex));
+            }catch(ShapeException z){}
         };
         penModel.addChangeListener(changeListenerPen);
+
+
 
         // Fill Color Chooser
         fillColorChooser.setPreviewPanel(new JPanel()); // removes the preview panel

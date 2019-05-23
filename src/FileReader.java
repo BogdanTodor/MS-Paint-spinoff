@@ -67,11 +67,11 @@ public class FileReader {
             }
         }
         else if (shapeType.equals("PEN")) {
-//            try{
+            try{
                 shape = new Pen(command);
-//            }catch(ShapeException z){
-//                throw new ShapeException(z);
-//            }
+            }catch(ShapeException z){
+                throw new ShapeException(z);
+            }
         }
         else if (shapeType.equals("FILL")) {
 //            try{

@@ -16,13 +16,29 @@ public class Pen implements Shape {
         if(input.contains("#")){
             s = input.split(" #");
         }else{
-            throw new ShapeException("No '#' found in Pen command");
+            throw new ShapeException("No '#' found in Pen command.");
         }
-        
+
+        if(s[1].length() == 7){
+        } else{
+            throw new ShapeException("Invalid colour command - Too many characters.");
+        }
+
+        System.out.println(s[1].length());
+
         int rr = Integer.parseInt(s[1].substring(0,2), 16);
         int gg = Integer.parseInt(s[1].substring(2,4), 16);
         int bb = Integer.parseInt(s[1].substring(4,6), 16);
-        color = new Color(rr, gg, bb);
+
+        try{
+            color = new Color(rr, gg, bb);
+        }catch(Exception e){
+            throw new ShapeException("Invalid colour pattern");
+        }
+
+
+
+
     }
 
     /** Sets the colour of the pen in the graphics driver.

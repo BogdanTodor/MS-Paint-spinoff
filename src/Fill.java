@@ -13,7 +13,7 @@ public class Fill implements Shape {
     /** Fills the inside portion of the shape with colour if the fill instruction is declared on the gui or in an
      * opened file.
      * @param input The string representation of a shape object*/
-    Fill (String input) {
+    Fill (String input) throws ShapeException{
         inputString = input;
         String s[] = input.split(" ");
         if (s[1].substring(0,3).equals("OFF")) {
@@ -24,7 +24,12 @@ public class Fill implements Shape {
             int rr = Integer.parseInt(s[1].substring(1,3), 16);
             int gg = Integer.parseInt(s[1].substring(3,5), 16);
             int bb = Integer.parseInt(s[1].substring(5,7), 16);
-            this.color = new Color(rr, gg, bb);
+
+            try{
+                this.color = new Color(rr, gg, bb);
+            } catch(Exception e){
+                throw new ShapeException("Invalid colour pattern.");
+            }
         }
         Colors.setIsFillOn(fill);
     }

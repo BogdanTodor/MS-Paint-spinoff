@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 import javax.swing.colorchooser.ColorSelectionModel;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
@@ -12,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.LinkedList;
 
 import static java.lang.Double.max;
 import static java.lang.Math.min;
@@ -22,23 +20,23 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class GUI extends JFrame implements Runnable {
 
     /** Instance of a menu bar*/
-    JMenuBar menuBar;
-    JPanel mainPanel;
+    private JMenuBar menuBar;
+    private JPanel mainPanel;
 
     /** Instance of a toggle button*/
-    JToggleButton fillToggleButton;
+    private JToggleButton fillToggleButton;
 
     /** The initial width of the GUI.*/
-    public static final int WIDTH = 460;
+    private static final int WIDTH = 460;
 
     /** The initial height of the GUI.*/
-    public static final int HEIGHT = 470;
+    private static final int HEIGHT = 470;
 
     /** Stores the resizeable width of the GUI.*/
-    public static double dynamicWidth;
+    private static double dynamicWidth;
 
     /** Stores the resizeable height of the GUI.*/
-    public static double dynamicHeight;
+    private static double dynamicHeight;
 
     /**
      * Create the GUI and show it. For thread safety, this method should be
@@ -47,7 +45,7 @@ public class GUI extends JFrame implements Runnable {
     private void createAndShowGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH,HEIGHT);
-        setMinimumSize(new Dimension(460, 470));
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
         addComponentsToPane(getContentPane());
         setJMenuBar(createMenuBar());
@@ -60,7 +58,7 @@ public class GUI extends JFrame implements Runnable {
     /**
      * Create the menu bar.
      */
-    public JMenuBar createMenuBar() {
+    private JMenuBar createMenuBar() {
         JMenu menu;
         JMenuItem menuItem;
 
@@ -70,156 +68,115 @@ public class GUI extends JFrame implements Runnable {
         menuBar.add(menu);
 
         menuItem = new JMenuItem("New");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newButtonClick();
-            }
-        });
+        menuItem.addActionListener(e -> newButtonClick());
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Open");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openButtonClick();
-            }
-        });
+        menuItem.addActionListener(e -> openButtonClick());
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Save");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveButtonClick();
-            }
-        });
+        menuItem.addActionListener(e -> saveButtonClick());
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Browse history");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JPopupMenu popup = new JPopupMenu();
+        menuItem.addActionListener(e -> {
+            JPopupMenu popup = new JPopupMenu();
 
-                ActionListener menuListener = new ActionListener() {
-                    public void actionPerformed(ActionEvent event) {
-                        Shape shape = null;
-                        String vecItem = event.getActionCommand();
-                        String[] splitted = vecItem.split(" ");
+            ActionListener menuListener = event -> {
+                Shape shape;
+                String vecItem = event.getActionCommand();
+                String[] splitted = vecItem.split(" ");
 
-                        shape = FileReader.createShape(splitted[0], vecItem);
+                shape = FileReader.createShape(splitted[0], vecItem);
 
-                        int index = Integer.MAX_VALUE;
-                        for (int i = 0; i < Shape.lineCommands.size(); i++) {
-                            if (shape.toString() == Shape.lineCommands.get(i).toString())
-                            {
-                                index = i;
-                                System.out.println(i);
-                                break;
-                            }
-                        }
-                        while(Shape.lineCommands.size() > index+1) {
-                            Shape.deletedLineCommands.add(Shape.lineCommands.get(index+1));
-                            Shape.lineCommands.remove(index+1);
-                        }
-                        revalidate();
-                        repaint();
+                int index = Integer.MAX_VALUE;
+                for (int i = 0; i < Shape.lineCommands.size(); i++) {
+                    if (shape.toString().equals(Shape.lineCommands.get(i).toString()))
+                    {
+                        index = i;
+                        System.out.println(i);
+                        break;
                     }
-                };
-                for (int i = Shape.lineCommands.size(); i-- > 0; ) {
-                    JMenuItem item = new JMenuItem(Shape.lineCommands.get(i).toString());
-                    popup.add(item);
-                    item.addActionListener(menuListener);
                 }
-                popup.show(getContentPane(), 10, 50);
-                // End
+                while(Shape.lineCommands.size() > index+1) {
+                    Shape.deletedLineCommands.add(Shape.lineCommands.get(index+1));
+                    Shape.lineCommands.remove(index+1);
+                }
+                revalidate();
+                repaint();
+            };
+            for (int i = Shape.lineCommands.size(); i-- > 0; ) {
+                JMenuItem item = new JMenuItem(Shape.lineCommands.get(i).toString());
+                popup.add(item);
+                item.addActionListener(menuListener);
             }
+            popup.show(getContentPane(), 10, 50);
+            // End
         });
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Recover changes");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                LinkedList<Shape> lineCommandsOriginal;
-                JPopupMenu popup = new JPopupMenu();
-                ActionListener menuListener = new ActionListener() {
-                    public void actionPerformed(ActionEvent event) {
-                        Shape shape = null;
-                        String vecItem = event.getActionCommand();
-                        String[] splitted = vecItem.split(" ");
-                        // Display output of the read lines.
+        menuItem.addActionListener(e -> {
+            JPopupMenu popup = new JPopupMenu();
+            ActionListener menuListener = event -> {
+                Shape shape;
+                String vecItem = event.getActionCommand();
+                String[] splitted = vecItem.split(" ");
+                // Display output of the read lines.
 
-                        shape = FileReader.createShape(splitted[0], vecItem);
+                shape = FileReader.createShape(splitted[0], vecItem);
 
-                        int index = Integer.MAX_VALUE;
-                        for (int i = 0; i < Shape.deletedLineCommands.size(); i++) {
-                            if (shape.toString() == Shape.deletedLineCommands.get(i).toString())
-                            {
-                                index = i;
-                                System.out.println(i);
-                                break;
-                            }
-                        }
-                        for(int i = index; i>=0; i--) {
-                            System.out.println(i);
-                            System.out.println(Shape.deletedLineCommands.get(i).toString());
-                            Shape temp = Shape.deletedLineCommands.get(i);
-                            Shape.lineCommands.add(temp);
-                            Shape.deletedLineCommands.remove(temp);
-                        }
-                        revalidate();
-                        repaint();
+                int index = Integer.MAX_VALUE;
+                for (int i = 0; i < Shape.deletedLineCommands.size(); i++) {
+                    if (shape.toString().equals(Shape.deletedLineCommands.get(i).toString()))
+                    {
+                        index = i;
+                        System.out.println(i);
+                        break;
                     }
-                };
-                for (int i = Shape.deletedLineCommands.size(); i-- > 0; ) {
-                    JMenuItem item = new JMenuItem(Shape.deletedLineCommands.get(i).toString());
-                    popup.add(item);
-                    item.addActionListener(menuListener);
                 }
-                popup.show(getContentPane(), 10, 50);
-                // End
+                for(int i = index; i>=0; i--) {
+                    System.out.println(i);
+                    System.out.println(Shape.deletedLineCommands.get(i).toString());
+                    Shape temp = Shape.deletedLineCommands.get(i);
+                    Shape.lineCommands.add(temp);
+                    Shape.deletedLineCommands.remove(temp);
+                }
+                revalidate();
+                repaint();
+            };
+            for (int i = Shape.deletedLineCommands.size(); i-- > 0; ) {
+                JMenuItem item = new JMenuItem(Shape.deletedLineCommands.get(i).toString());
+                popup.add(item);
+                item.addActionListener(menuListener);
             }
+            popup.show(getContentPane(), 10, 50);
+            // End
         });
         menu.add(menuItem);
 
         menu = new JMenu("Edit");
         menuBar.add(menu);
 
-        menuItem = new JMenuItem("Grid size");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editGridSize();
-            }
-        });
-        menu.add(menuItem);
-
         menuItem = new JMenuItem("Pen color");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Color newPenColor = JColorChooser.showDialog(GUI.this, "Select Pen Color", Color.BLACK);
-                if (newPenColor != null) {
-                    String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
-                    Shape.lineCommands.add(new Pen("PEN " + hex));
-                }
+        menuItem.addActionListener(e -> {
+            Color newPenColor = JColorChooser.showDialog(GUI.this, "Select Pen Color", Color.BLACK);
+            if (newPenColor != null) {
+                String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+                Shape.lineCommands.add(new Pen("PEN " + hex));
             }
         });
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Fill color");
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Color newFillColor = JColorChooser.showDialog(GUI.this, "Select Fill Color", Color.BLACK);
-                if (newFillColor != null) {
-                    fillToggleButton.setSelected(true);
-                    fillToggleButton.setText("Fill: On");
-                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                    Shape.lineCommands.add(new Fill("FILL " + hex));
-                }
+        menuItem.addActionListener(e -> {
+            Color newFillColor = JColorChooser.showDialog(GUI.this, "Select Fill Color", Color.BLACK);
+            if (newFillColor != null) {
+                fillToggleButton.setSelected(true);
+                fillToggleButton.setText("Fill: On");
+                String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                Shape.lineCommands.add(new Fill("FILL " + hex));
             }
         });
         menu.add(menuItem);
@@ -234,15 +191,14 @@ public class GUI extends JFrame implements Runnable {
      * @parem pane the pane to add components to.
      *
      */
-    public void addComponentsToPane(Container pane) {
+    private void addComponentsToPane(Container pane) {
         // Setup layout and components
         pane.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-//        JPanel mainPanel, leftPanel, rightPanel, bottomPanel;
         JPanel leftPanel, rightPanel, bottomPanel;
         JButton undoButton;
         ButtonGroup drawingButtons = new ButtonGroup();
-        JToggleButton plotButton, lineButton, rectangleButton, ellipseButton, polyButton, gridButton;
+        JToggleButton plotButton, lineButton, rectangleButton, ellipseButton, polyButton;
         JColorChooser penColorChooser, fillColorChooser;
         JTabbedPane colorTabs;
 
@@ -266,16 +222,16 @@ public class GUI extends JFrame implements Runnable {
         labels[3] = (rectangleHelp);
         labels[4] = (polyHelp);
         Font f = new Font("Ariel",Font.PLAIN,12);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.PAGE_START;
+        c.fill = GridBagConstraints.LINE_START;
+        c.anchor = GridBagConstraints.LINE_START;
         c.gridx = 0;
         c.gridwidth = 2;
         c.gridy = 5;
-        for (int i = 0; i < labels.length; i++) {
-            labels[i].setFont(f);
-            labels[i].setVisible(false);
-            pane.add(labels[i], c);
-            pane.add(labels[i], c);
+        for (JLabel label1 : labels) {
+            label1.setFont(f);
+            label1.setVisible(false);
+            pane.add(label1, c);
+            pane.add(label1, c);
         }
 
         /*
@@ -284,14 +240,11 @@ public class GUI extends JFrame implements Runnable {
 //        c.fill = GridBagConstraints.HORIZONTAL;
 
         plotButton = new JToggleButton("Plot");
-        plotButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (JLabel label : labels) {
-                    label.setVisible(false);
-                }
-                plotHelp.setVisible(plotButton.isSelected());
+        plotButton.addActionListener(e -> {
+            for (JLabel label : labels) {
+                label.setVisible(false);
             }
+            plotHelp.setVisible(plotButton.isSelected());
         });
         c.anchor = GridBagConstraints.PAGE_START;
         c.gridwidth = 1;
@@ -301,14 +254,11 @@ public class GUI extends JFrame implements Runnable {
         pane.add(plotButton, c);
 
         lineButton = new JToggleButton("Line");
-        lineButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (JLabel label : labels) {
-                    label.setVisible(false);
-                }
-                lineHelp.setVisible(lineButton.isSelected());
+        lineButton.addActionListener(e -> {
+            for (JLabel label : labels) {
+                label.setVisible(false);
             }
+            lineHelp.setVisible(lineButton.isSelected());
         });
         c.gridx = 0;
         c.gridy = 1;
@@ -316,14 +266,11 @@ public class GUI extends JFrame implements Runnable {
         pane.add(lineButton, c);
 
         rectangleButton = new JToggleButton("Rectangle");
-        rectangleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (JLabel label : labels) {
-                    label.setVisible(false);
-                }
-                rectangleHelp.setVisible(rectangleButton.isSelected());
+        rectangleButton.addActionListener(e -> {
+            for (JLabel label : labels) {
+                label.setVisible(false);
             }
+            rectangleHelp.setVisible(rectangleButton.isSelected());
         });
         c.gridx = 1;
         c.gridy = 0;
@@ -331,14 +278,11 @@ public class GUI extends JFrame implements Runnable {
         pane.add(rectangleButton, c);
 
         polyButton = new JToggleButton(" Polygon ");
-        polyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (JLabel label : labels) {
-                    label.setVisible(false);
-                }
-                polyHelp.setVisible(polyButton.isSelected());
+        polyButton.addActionListener(e -> {
+            for (JLabel label : labels) {
+                label.setVisible(false);
             }
+            polyHelp.setVisible(polyButton.isSelected());
         });
         c.gridx = 1;
         c.gridy = 1;
@@ -346,14 +290,11 @@ public class GUI extends JFrame implements Runnable {
         pane.add(polyButton, c);
 
         ellipseButton = new JToggleButton("Ellipse");
-        ellipseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (JLabel label : labels) {
-                    label.setVisible(false);
-                }
-                ellipseHelp.setVisible(ellipseButton.isSelected());
+        ellipseButton.addActionListener(e -> {
+            for (JLabel label : labels) {
+                label.setVisible(false);
             }
+            ellipseHelp.setVisible(ellipseButton.isSelected());
         });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 1;
@@ -362,59 +303,31 @@ public class GUI extends JFrame implements Runnable {
         pane.add(ellipseButton, c);
 
         undoButton = new JButton("Undo");
-        undoButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                undo();
-            }
-        });
+        undoButton.addActionListener(e -> undo());
         c.gridx = 0;
         c.gridy = 2;
         pane.add(undoButton, c);
 
         fillToggleButton = new JToggleButton("Fill: Off");
-        fillToggleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (fillToggleButton.isSelected()) {
-                    Color newFillColor = fillColorChooser.getColor();
-                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                    Shape.lineCommands.add(new Fill("FILL " + hex));
-                    fillToggleButton.setText("Fill: On");
-                }
-                else if (!fillToggleButton.isSelected()) {
-                    Shape.lineCommands.add(new Fill("FILL OFF"));
-                    fillToggleButton.setText("Fill: Off");
-                }
-                revalidate();
-                repaint();
+        fillToggleButton.addActionListener(e -> {
+            if (fillToggleButton.isSelected()) {
+                Color newFillColor = fillColorChooser.getColor();
+                String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                Shape.lineCommands.add(new Fill("FILL " + hex));
+                fillToggleButton.setText("Fill: On");
             }
+            else if (!fillToggleButton.isSelected()) {
+                Shape.lineCommands.add(new Fill("FILL OFF"));
+                fillToggleButton.setText("Fill: Off");
+            }
+            revalidate();
+            repaint();
         });
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 3;
         c.gridwidth = 2;
         pane.add(fillToggleButton, c);
-
-        gridButton = new JToggleButton("Grid: Off");
-        gridButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (gridButton.isSelected()) {
-                    gridButton.setText("Grid: On");
-
-                }
-                else if (!gridButton.isSelected()) {
-                    gridButton.setText("Grid: Off");
-                }
-                revalidate();
-                repaint();
-            }
-        });
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 4;
-        pane.add(gridButton, c);
 
         /*
         ADD COLOR CHOOSERS
@@ -429,12 +342,10 @@ public class GUI extends JFrame implements Runnable {
             }
         }
         ColorSelectionModel penModel = penColorChooser.getSelectionModel();
-        ChangeListener changeListenerPen = new ChangeListener() {
-            public void stateChanged(ChangeEvent changeEvent) {
-                Color newPenColor = penColorChooser.getColor();
-                String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
-                Shape.lineCommands.add(new Pen("PEN " + hex));
-            }
+        ChangeListener changeListenerPen = changeEvent -> {
+            Color newPenColor = penColorChooser.getColor();
+            String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
+            Shape.lineCommands.add(new Pen("PEN " + hex));
         };
         penModel.addChangeListener(changeListenerPen);
 
@@ -447,13 +358,11 @@ public class GUI extends JFrame implements Runnable {
             }
         }
         ColorSelectionModel fillModel = fillColorChooser.getSelectionModel();
-        ChangeListener changeListenerFill = new ChangeListener() {
-            public void stateChanged(ChangeEvent changeEvent) {
-                if (fillToggleButton.isSelected()) {
-                    Color newFillColor = fillColorChooser.getColor();
-                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                    Shape.lineCommands.add(new Fill("FILL " + hex));
-                }
+        ChangeListener changeListenerFill = changeEvent -> {
+            if (fillToggleButton.isSelected()) {
+                Color newFillColor = fillColorChooser.getColor();
+                String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                Shape.lineCommands.add(new Fill("FILL " + hex));
             }
         };
         fillModel.addChangeListener(changeListenerFill);
@@ -482,7 +391,7 @@ public class GUI extends JFrame implements Runnable {
         rightPanel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(pane.getWidth() - mainPanel.getWidth() - leftPanel.getWidth() - 3, 0);
+                return new Dimension(pane.getWidth() - mainPanel.getWidth() - leftPanel.getWidth() - 5, 0);
             }
         };
         rightPanel.setBackground(Color.LIGHT_GRAY);
@@ -492,7 +401,7 @@ public class GUI extends JFrame implements Runnable {
         bottomPanel = new JPanel() {
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(0, pane.getHeight() - mainPanel.getHeight() - menuBar.getHeight() + 20);
+                return new Dimension(0, pane.getHeight() - mainPanel.getHeight() - menuBar.getHeight() + 10);
             }
         };
         bottomPanel.setBackground(Color.LIGHT_GRAY);
@@ -522,13 +431,13 @@ public class GUI extends JFrame implements Runnable {
                 }
                 if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1 && polyButton.isSelected()) {
                     System.out.println("Right CLICK");
-                    String input = "POLYGON";
+                    StringBuilder input = new StringBuilder("POLYGON");
                     for (int i = 0; i < Polygon.getClickCount(); i++) {
-                        input+= " " + Polygon.ClickCoordsX[i] + " " + Polygon.ClickCoordsY[i];
+                        input.append(" ").append(Polygon.ClickCoordsX[i]).append(" ").append(Polygon.ClickCoordsY[i]);
                     }
-                    input += " " + Polygon.ClickCoordsX[0] + " " + Polygon.ClickCoordsY[0];
+                    input.append(" ").append(Polygon.ClickCoordsX[0]).append(" ").append(Polygon.ClickCoordsY[0]);
                     System.out.println(input);
-                    Shape.lineCommands.add(new Polygon(input));
+                    Shape.lineCommands.add(new Polygon(input.toString()));
                     Polygon.resetClickCount();
 
                 }
@@ -575,6 +484,27 @@ public class GUI extends JFrame implements Runnable {
                 repaint();
             }
         });
+        mainPanel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                double x2 = round(e.getX()/dynamicWidth,2);
+                double y2 = round(e.getY()/dynamicHeight,2);
+                if (lineButton.isSelected()) {
+                    Shape.previewShape.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
+                }
+                else if (rectangleButton.isSelected()) {
+                    Shape.previewShape.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
+                }
+                else if (ellipseButton.isSelected()) {
+                    Shape.previewShape.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
+                }
+                while (Shape.previewShape.size()>1) {
+                    Shape.previewShape.removeFirst();
+                }
+                revalidate();
+                repaint();
+            }
+        });
     }
 
     /**
@@ -589,7 +519,7 @@ public class GUI extends JFrame implements Runnable {
      * @parem weighty y weighting
      * @parem c the Grid Bag Constraints
      */
-    public static void setConstraints(JPanel panel, int gridx, int gridy, int gridwidth, int gridheight, int weightx, int weighty, GridBagConstraints c, Container pane) {
+    private static void setConstraints(JPanel panel, int gridx, int gridy, int gridwidth, int gridheight, int weightx, int weighty, GridBagConstraints c, Container pane) {
         c.fill = GridBagConstraints.BOTH;
         c.gridx = gridx;
         c.gridy = gridy;
@@ -600,14 +530,8 @@ public class GUI extends JFrame implements Runnable {
         pane.add(panel, c);
     }
 
-    /** Prompts user to enter an appropriate grid size.*/
-    public static void editGridSize() {
-        String input = JOptionPane.showInputDialog(null, "Enter grid size ranging from 0 to 0.5");
-        System.out.println(input);
-    }
-
     /** Setup key bindings */
-    public void setupKeyBindings() {
+    private void setupKeyBindings() {
         String UNDO = "Undo action key";
         Action undoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -624,14 +548,9 @@ public class GUI extends JFrame implements Runnable {
         };
         for(InputMap i : inputMaps) {
             // UNDO support: On Mac = cmd-z, on Windows = ctrl-z
-            i.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), UNDO);
+            i.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()), UNDO);
         }
     }
-
-//    /** Display user controls on left panel. Adapts to current selected control. */
-//    public void userControls() {
-//        Jlabel
-//    }
 
     /**
      * When menu bar > 'File' > 'new' is clicked, clear the current list of VEC shapes and repaint the canvas blank.
@@ -639,13 +558,13 @@ public class GUI extends JFrame implements Runnable {
      * Pen color defaults to black.
      *
      */
-    public void newButtonClick() {
+    private void newButtonClick() {
         Shape.lineCommands.clear();
         resetFillButton();
     }
 
     /** Untoggles Fill button, and updates text to "Fill: Off". */
-    public void resetFillButton() {
+    private void resetFillButton() {
         fillToggleButton.setSelected(false);
         fillToggleButton.setText("Fill: Off");
         revalidate();
@@ -659,7 +578,7 @@ public class GUI extends JFrame implements Runnable {
      * configuration is maintained from the open file.
      *
      */
-    public void openButtonClick() {
+    private void openButtonClick() {
         JFileChooser fileChooser = new JFileChooser();
         // Creates filter for VEC files, adds the filter to the open event and sets the filter as the default file type.
         FileFilter VECFilter = new FilterFileType(".vec", "VEC Documents");
@@ -683,6 +602,7 @@ public class GUI extends JFrame implements Runnable {
                 repaint();
             }
             catch (Exception ex) {
+                showMessageDialog(this, "File could not be opened.");
             }
         }
     }
@@ -692,7 +612,7 @@ public class GUI extends JFrame implements Runnable {
      * '.VEC' are filtered for. When the file name is specified, save the current VEC shape file
      * to the target file. The extension ".VEC" is added automatically.
      */
-    public void saveButtonClick() {
+    private void saveButtonClick() {
         // set file filter
         JFileChooser fileChooser = new JFileChooser();
 
@@ -710,36 +630,25 @@ public class GUI extends JFrame implements Runnable {
                 repaint();
             }
             catch (Exception ex) {
+                showMessageDialog(this, "File could not be saved");
             }
         }
     }
 
-//    /**
-//     * Configure the grid.
-//     *
-//     * @parem state if the grid is on or off.
-//     *
-//     */
-//    public void configureGrid(boolean state) {
-//        if (state == true) {
-//            gridButton.setText("Grid: On");
-//        }
-//    }
-
     /**
      * Helper function to round coordinates on the drawing canvas to 2 decimal places
-     * @param value
-     * @param places
-     * @return
+     * @param value The value to round
+     * @param places The number of decimal places to round too
+     * @return The rounded value
      */
-    public static double round(double value, int places) {
+    private static double round(double value, int places) {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
 
     /** Removes the last VEC command drawn on screen or opened from file. */
-    public void undo() {
+    private void undo() {
         try {
             Shape.deletedLineCommands.add(Shape.lineCommands.getLast());
             Shape.lineCommands.removeLast();
@@ -766,7 +675,7 @@ public class GUI extends JFrame implements Runnable {
 class drawingPanel extends JPanel {
 
     /** Sets default size to 300x300 and adds a Gray line border.*/
-    public drawingPanel() {
+    drawingPanel() {
         setSize(300,300);
         setBorder(new LineBorder(Color.GRAY));
         setVisible(true);
@@ -787,6 +696,9 @@ class drawingPanel extends JPanel {
         Colors.setIsFillOn(false);
         for (Shape shape : Shape.lineCommands) {
             shape.drawShape(g, size);
+        }
+        if (Shape.previewShape.size() == 1) {
+            Shape.previewShape.getFirst().drawShape(g,size);
         }
     }
 }

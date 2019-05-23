@@ -5,10 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e6b5da-dd46-4f68-8ff7-4d78c6456716" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inputTests/example1.vec" beforeDir="false" afterPath="$PROJECT_DIR$/inputTests/example1.vec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/FileReaderClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/FileReader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$12.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$13.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$14.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$15.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$16.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$17.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$18.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$19.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$20.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$21.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$22.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$23.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$5$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI$9.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileReaderClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileReaderClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Shape.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/Shape.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/drawingPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/VectorDesignToolProject/drawingPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/historyPopup$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/VectorDesignToolProject/historyPopup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shape.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,20 +56,27 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="430" column="75" lean-forward="true" selection-start-line="430" selection-start-column="75" selection-end-line="430" selection-end-column="75" />
+            <state relative-caret-position="-7">
+              <caret line="510" column="43" selection-start-line="510" selection-start-column="43" selection-end-line="510" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#19356#20583#0" expanded="true" />
+                <element signature="e#20582#20583#0" expanded="true" />
+                <element signature="e#26346#26347#0" expanded="true" />
+                <element signature="e#26499#26500#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FileReaderClass.java">
+        <entry file="file://$PROJECT_DIR$/src/Shape.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="71" column="69" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="69" />
+            <state relative-caret-position="240">
+              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,15 +115,17 @@
         <option value="$PROJECT_DIR$/src/Polygon.java" />
         <option value="$PROJECT_DIR$/src/Line.java" />
         <option value="$PROJECT_DIR$/src/FileReaderClass.java" />
+        <option value="$PROJECT_DIR$/unitTests/src/ColorsTest.java" />
+        <option value="$PROJECT_DIR$/src/Shape.java" />
+        <option value="$PROJECT_DIR$/src/FileReader.java" />
         <option value="$PROJECT_DIR$/src/GUI.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="511" />
-    <option name="y" value="-8" />
-    <option name="width" value="1031" />
-    <option name="height" value="952" />
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1361" />
+    <option name="height" value="881" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -102,12 +144,6 @@
               <item name="Vector_Design_Tool" type="b2602c69:ProjectViewProjectNode" />
               <item name="Vector_Design_Tool" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Vector_Design_Tool" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Vector_Design_Tool" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="Vector_Design_Tool" type="b2602c69:ProjectViewProjectNode" />
@@ -138,7 +174,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558612469435" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558617701328" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -265,7 +301,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.107731305" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1495564" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -292,16 +328,6 @@
     <entry file="file://$PROJECT_DIR$/src/EventListener.java" />
     <entry file="file://$PROJECT_DIR$/src/old_Reader.java" />
     <entry file="file://$PROJECT_DIR$/unitTests/ColorsTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/Shape.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -316,42 +342,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/historyPopup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-374">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Fill.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" selection-start-line="17" selection-end-line="22" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Colors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
-          <folding>
-            <element signature="e#697#698#0" expanded="true" />
-            <element signature="e#727#728#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="56" column="17" lean-forward="true" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2854#2855#0" expanded="true" />
-            <element signature="e#2964#2965#0" expanded="true" />
-            <element signature="e#3070#3071#0" expanded="true" />
-            <element signature="e#3184#3185#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -367,13 +361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Line.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
@@ -381,27 +368,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Ellipse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Rectangle.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTests/src/ColorsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -424,18 +394,6 @@
           <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/unitTests/src/LineTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="19" column="54" lean-forward="true" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1243#1244#0" expanded="true" />
-            <element signature="e#1308#1309#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -480,19 +438,105 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileReaderClass.java">
+    <entry file="file://$PROJECT_DIR$/src/historyPopup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="71" column="69" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="69" />
+        <state relative-caret-position="30">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/unitTests/src/ColorsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/javax/swing/event/ChangeListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="41" column="9" selection-start-line="41" selection-start-column="9" selection-end-line="41" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Colors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="25" column="47" selection-start-line="25" selection-start-column="47" selection-end-line="25" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Polygon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-227">
+          <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2820#2821#0" expanded="true" />
+            <element signature="e#2854#2855#0" expanded="true" />
+            <element signature="e#2936#2937#0" expanded="true" />
+            <element signature="e#2964#2965#0" expanded="true" />
+            <element signature="e#3037#3038#0" expanded="true" />
+            <element signature="e#3070#3071#0" expanded="true" />
+            <element signature="e#3154#3155#0" expanded="true" />
+            <element signature="e#3184#3185#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/unitTests/src/LineTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="54" lean-forward="true" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1243#1244#0" expanded="true" />
+            <element signature="e#1308#1309#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Ellipse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="48" column="9" lean-forward="true" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="45" column="69" selection-start-line="45" selection-start-column="69" selection-end-line="45" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shape.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="430" column="75" lean-forward="true" selection-start-line="430" selection-start-column="75" selection-end-line="430" selection-end-column="75" />
+        <state relative-caret-position="-7">
+          <caret line="510" column="43" selection-start-line="510" selection-start-column="43" selection-end-line="510" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#19356#20583#0" expanded="true" />
+            <element signature="e#20582#20583#0" expanded="true" />
+            <element signature="e#26346#26347#0" expanded="true" />
+            <element signature="e#26499#26500#0" expanded="true" />
           </folding>
         </state>
       </provider>

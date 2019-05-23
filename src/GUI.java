@@ -429,32 +429,33 @@ public class GUI extends JFrame implements Runnable {
         mainPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                double x = round(e.getX()/dynamicWidth,2);
-                double y = round(e.getY()/dynamicHeight,2);
-                if(plotButton.isSelected()) {
-                    Shape.lineCommands.add(new Plot("PLOT "+x+" "+y));
-                }
-                if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1 && polyButton.isSelected()) {
-                    System.out.println("Right CLICK");
-                    StringBuilder input = new StringBuilder("POLYGON");
-                    for (int i = 0; i < Polygon.getClickCount(); i++) {
-                        input.append(" ").append(Polygon.ClickCoordsX[i]).append(" ").append(Polygon.ClickCoordsY[i]);
+                try {
+                    double x = round(e.getX() / dynamicWidth, 2);
+                    double y = round(e.getY() / dynamicHeight, 2);
+                    if (plotButton.isSelected()) {
+                        Shape.lineCommands.add(new Plot("PLOT " + x + " " + y));
                     }
-                    input.append(" ").append(Polygon.ClickCoordsX[0]).append(" ").append(Polygon.ClickCoordsY[0]);
-                    System.out.println(input);
-                    Shape.lineCommands.add(new Polygon(input.toString()));
-                    Polygon.resetClickCount();
+                    if (SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1 && polyButton.isSelected()) {
+                        System.out.println("Right CLICK");
+                        StringBuilder input = new StringBuilder("POLYGON");
+                        for (int i = 0; i < Polygon.getClickCount(); i++) {
+                            input.append(" ").append(Polygon.ClickCoordsX[i]).append(" ").append(Polygon.ClickCoordsY[i]);
+                        }
+                        input.append(" ").append(Polygon.ClickCoordsX[0]).append(" ").append(Polygon.ClickCoordsY[0]);
+                        System.out.println(input);
+                        Shape.lineCommands.add(new Polygon(input.toString()));
+                        Polygon.resetClickCount();
 
-                }
-                else if(polyButton.isSelected()) {
-                    System.out.println("Clicked " +x+" "+y);
-                    System.out.println("Click count " + Polygon.getClickCount());
-                    Polygon.ClickCoordsX[Polygon.getClickCount()] = x;
-                    Polygon.ClickCoordsY[Polygon.getClickCount()] = y;
-                    Polygon.addClick();
-                }
-                revalidate();
-                repaint();
+                    } else if (polyButton.isSelected()) {
+                        System.out.println("Clicked " + x + " " + y);
+                        System.out.println("Click count " + Polygon.getClickCount());
+                        Polygon.ClickCoordsX[Polygon.getClickCount()] = x;
+                        Polygon.ClickCoordsY[Polygon.getClickCount()] = y;
+                        Polygon.addClick();
+                    }
+                    revalidate();
+                    repaint();
+                }catch(ShapeException z){}
             }
             @Override
             public void mousePressed(MouseEvent e) {

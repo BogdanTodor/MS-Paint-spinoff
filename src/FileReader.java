@@ -45,36 +45,60 @@ public class FileReader {
 
     public static Shape createShape(String shapeType, String command) throws ShapeException{
         Shape shape = null;
-        try{
         if (shapeType.equals("LINE")) {
-            shape = new Line(command);
+            try{
+                shape = new Line(command);
+            }catch(ShapeException z){
+                throw new ShapeException(z);
+            }
         }
         else if (shapeType.equals("PLOT")) {
-            shape = new Plot(command);
+            try{
+                shape = new Plot(command);
+            }catch(ShapeException z){
+                throw new ShapeException(z);
+            }
         }
         else if (shapeType.equals("RECTANGLE")) {
-            shape = new Rectangle(command);
+            try{
+                shape = new Rectangle(command);
+            }catch(ShapeException z){
+                throw new ShapeException(z);
+            }
         }
         else if (shapeType.equals("PEN")) {
-            shape = new Pen(command);
-        }
-        else if (shapeType.equals("FILL")) {
-            shape = new Fill(command);
-        }
-        else if (shapeType.equals("ELLIPSE")) {
 //            try{
-                shape = new Ellipse(command);
-//            } catch(ShapeException z){
+                shape = new Pen(command);
+//            }catch(ShapeException z){
 //                throw new ShapeException(z);
 //            }
         }
+        else if (shapeType.equals("FILL")) {
+//            try{
+                shape = new Fill(command);
+//            }catch(ShapeException z){
+//                throw new ShapeException(z);
+//            }
+        }
+        else if (shapeType.equals("ELLIPSE")) {
+            try{
+                shape = new Ellipse(command);
+            } catch(ShapeException z){
+                throw new ShapeException(z);
+            }
+        }
         else if (shapeType.equals("POLYGON")) {
-            shape = new Polygon(command);
+            try{
+                shape = new Polygon(command);
+            }
+            catch(ShapeException z){
+                throw new ShapeException(z);
+            }
+        }
+        else{
+            throw new ShapeException("Invalid shape command - Please try again");
         }
         return shape;
-        } catch(ShapeException z){
-            throw new ShapeException(z);
-            }
     }
 
     /** Saves the current canvas and drawing data as a VEC formatted file.

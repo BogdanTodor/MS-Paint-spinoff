@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
+import static java.lang.Double.parseDouble;
+
 /** Used to draw pixel shapes on the canvas.*/
 public class Plot implements Shape {
 
@@ -15,14 +17,14 @@ public class Plot implements Shape {
 
     /** Recieves the position of the mouse clicks and populates the coords array.
      * @param input The raw position of each mouse click registered by the plot shape function*/
-    Plot( String input) {
+    Plot( String input) throws ShapeException{
         inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
             try{
-                coords[i] = Double.parseDouble(s[i+1]);
-            } catch(NumberFormatException e){
-                e.printStackTrace();
+                coords[i] = parseDouble(s[i + 1]);
+            }catch(Exception e){
+                throw new ShapeException("Invalid coordinate input");
             }
         }
     }

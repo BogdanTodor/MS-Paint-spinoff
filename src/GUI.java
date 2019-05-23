@@ -16,6 +16,7 @@ import java.util.LinkedList;
 
 import static java.lang.Double.max;
 import static java.lang.Math.min;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /** Used to construct the GUI, assign button functionality */
 public class GUI extends JFrame implements Runnable {
@@ -106,29 +107,8 @@ public class GUI extends JFrame implements Runnable {
                         Shape shape = null;
                         String vecItem = event.getActionCommand();
                         String[] splitted = vecItem.split(" ");
-                        // Display output of the read lines.
 
-                        if (splitted[0].equals("LINE")) {
-                            shape = new Line(vecItem);
-                        }
-                        else if (splitted[0].equals("PLOT")) {
-                            shape = new Plot(vecItem);
-                        }
-                        else if (splitted[0].equals("RECTANGLE")) {
-                            shape = new Rectangle(vecItem);
-                        }
-                        else if (splitted[0].equals("PEN")) {
-                            shape = new Pen(vecItem);
-                        }
-                        else if (splitted[0].equals("FILL")) {
-                            shape = new Fill(vecItem);
-                        }
-                        else if (splitted[0].equals("ELLIPSE")) {
-                            shape = new Ellipse(vecItem);
-                        }
-                        else if (splitted[0].equals("POLYGON")) {
-                            shape = new Polygon(vecItem);
-                        }
+                        shape = FileReader.createShape(splitted[0], vecItem);
 
                         int index = Integer.MAX_VALUE;
                         for (int i = 0; i < Shape.lineCommands.size(); i++) {
@@ -171,27 +151,7 @@ public class GUI extends JFrame implements Runnable {
                         String[] splitted = vecItem.split(" ");
                         // Display output of the read lines.
 
-                        if (splitted[0].equals("LINE")) {
-                            shape = new Line(vecItem);
-                        }
-                        else if (splitted[0].equals("PLOT")) {
-                            shape = new Plot(vecItem);
-                        }
-                        else if (splitted[0].equals("RECTANGLE")) {
-                            shape = new Rectangle(vecItem);
-                        }
-                        else if (splitted[0].equals("PEN")) {
-                            shape = new Pen(vecItem);
-                        }
-                        else if (splitted[0].equals("FILL")) {
-                            shape = new Fill(vecItem);
-                        }
-                        else if (splitted[0].equals("ELLIPSE")) {
-                            shape = new Ellipse(vecItem);
-                        }
-                        else if (splitted[0].equals("POLYGON")) {
-                            shape = new Polygon(vecItem);
-                        }
+                        shape = FileReader.createShape(splitted[0], vecItem);
 
                         int index = Integer.MAX_VALUE;
                         for (int i = 0; i < Shape.deletedLineCommands.size(); i++) {
@@ -711,7 +671,7 @@ public class GUI extends JFrame implements Runnable {
         {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                FileReaderClass.open(selectedFile.getPath());
+                FileReader.open(selectedFile.getPath());
                 if (Colors.isFillOn) {
                     fillToggleButton.setSelected(true);
                     fillToggleButton.setText("Fill: On");
@@ -745,7 +705,7 @@ public class GUI extends JFrame implements Runnable {
         {
             File selectedFile = fileChooser.getSelectedFile();
             try {
-                FileReaderClass.save(selectedFile.getPath()+".vec");
+                FileReader.save(selectedFile.getPath()+".vec");
                 revalidate();
                 repaint();
             }
@@ -780,27 +740,15 @@ public class GUI extends JFrame implements Runnable {
 
     /** Removes the last VEC command drawn on screen or opened from file. */
     public void undo() {
-        try {Shape.lineCommands.removeLast(); }
+        try {
+            Shape.deletedLineCommands.add(Shape.lineCommands.getLast());
+            Shape.lineCommands.removeLast();
+        }
         catch (Exception undoException) {
+            showMessageDialog(null, "No actions to undo");
         }
         revalidate();
         repaint();
-    }
-
-    /**
-     * Undo History Support: brings up a list containing the history of drawing
-     * commands for that image, allowing the user to step back and forth through
-     * the creation of that image
-     */
-    public void undoHistory() {
-        new historyPopup(this);
-        revalidate();
-        repaint();
-    }
-
-    public void refresh() {
-        this.revalidate();
-        this.repaint();
     }
 
     /** Calls the method which creates the GUI.*/

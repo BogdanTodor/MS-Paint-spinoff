@@ -109,7 +109,6 @@ public class Rectangle extends Rectangle2D implements Shape {
 
     // Following methods not used, but required to override to extend Rectangle2D
 
-
     @Override
     public void setRect(double x, double y, double w, double h) {
     }

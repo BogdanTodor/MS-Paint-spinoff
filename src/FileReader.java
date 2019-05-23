@@ -69,7 +69,7 @@ public class FileReader {
         filecontent.close();
     }
 
-    public static Shape createShape(String shapeType, String command)throws Exception{
+    public static Shape createShape(String shapeType, String command) throws Exception{
         Shape shape = null;
         if (shapeType.equals("LINE")) {
             shape = new Line(command);
@@ -87,13 +87,18 @@ public class FileReader {
             shape = new Fill(command);
         }
         else if (shapeType.equals("ELLIPSE")) {
-            shape = new Ellipse(command);
+            try{
+                shape = new Ellipse(command);
+            } catch(ShapeException e){
+                throw e;
+            }
+
         }
         else if (shapeType.equals("POLYGON")) {
             shape = new Polygon(command);
         }
         else{
-            throw new Exception("Invalid shape command");
+//            throw new Exception("Invalid shape command");
         }
         return shape;
     }

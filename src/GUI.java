@@ -569,7 +569,11 @@ public class GUI extends JFrame implements Runnable {
                     Shape.lineCommands.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
                 }
                 else if (ellipseButton.isSelected()) {
-                    Shape.lineCommands.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
+                    try{
+                        Shape.lineCommands.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
+                    }catch(ShapeException e){
+//                        JPopupmesage.showdialogue(a.getmessage());
+                    }
                 }
                 revalidate();
                 repaint();

@@ -26,7 +26,7 @@ public class FileReader {
 
     /** Opens the selected VEC formatted file and loads the commands stored within the file.
      * @param path The path of the file to be opened.*/
-    public static void open(String path)throws Exception{
+    public static void open(String path) throws Exception{
         File file = new File(path);
 
         BufferedReader filecontent = new BufferedReader(new java.io.FileReader(file));
@@ -39,38 +39,13 @@ public class FileReader {
             // Display output of the read lines.
             System.out.println(stringExtractor(splitted));
             Shape.lineCommands.add(createShape(splitted[0],stringExtractor(splitted)));
-
-            // moved this code into a static method for use in GUI class
-//            if (splitted[0].equals("LINE")) {
-//                Shape.lineCommands.add(new Line(stringExtractor(splitted)));
-//            }
-//            else if (splitted[0].equals("PLOT")) {
-//                Shape.lineCommands.add(new Plot(stringExtractor(splitted)));
-//            }
-//            else if (splitted[0].equals("RECTANGLE")) {
-//                Shape.lineCommands.add(new Rectangle(stringExtractor(splitted)));
-//            }
-//            else if (splitted[0].equals("PEN")) {
-//                Shape.lineCommands.add(new Pen(stringExtractor(splitted)));
-//            }
-//            else if (splitted[0].equals("FILL")) {
-//                Shape.lineCommands.add(new Fill(stringExtractor(splitted)));
-//            }
-//            else if (splitted[0].equals("ELLIPSE")) {
-//                Shape.lineCommands.add(new Ellipse(stringExtractor(splitted)));
-//            }
-//            else if (splitted[0].equals("POLYGON")) {
-//                Shape.lineCommands.add(new Polygon(stringExtractor(splitted)));
-//            }
-//            else{
-//
-//            }
         }
         filecontent.close();
     }
 
-    public static Shape createShape(String shapeType, String command) throws Exception{
+    public static Shape createShape(String shapeType, String command) throws ShapeException{
         Shape shape = null;
+        try{
         if (shapeType.equals("LINE")) {
             shape = new Line(command);
         }
@@ -87,20 +62,19 @@ public class FileReader {
             shape = new Fill(command);
         }
         else if (shapeType.equals("ELLIPSE")) {
-            try{
+//            try{
                 shape = new Ellipse(command);
-            } catch(ShapeException e){
-                throw e;
-            }
-
+//            } catch(ShapeException z){
+//                throw new ShapeException(z);
+//            }
         }
         else if (shapeType.equals("POLYGON")) {
             shape = new Polygon(command);
         }
-        else{
-//            throw new Exception("Invalid shape command");
-        }
         return shape;
+        } catch(ShapeException z){
+            throw new ShapeException(z);
+            }
     }
 
     /** Saves the current canvas and drawing data as a VEC formatted file.

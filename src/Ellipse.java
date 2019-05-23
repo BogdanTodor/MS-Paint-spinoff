@@ -20,7 +20,7 @@ public class Ellipse extends Ellipse2D  implements Shape{
 
     /** Recieves the position of the mouse clicks, splits them and populates the coords array
      * @param input The raw position of each mouse click registered by the Ellipse shape function*/
-    Ellipse(String input) throws Exception{
+    Ellipse(String input) throws ShapeException{
         inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {

@@ -19,7 +19,11 @@ public class Plot implements Shape {
         inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
-            coords[i] = Double.parseDouble(s[i+1]);
+            try{
+                coords[i] = Double.parseDouble(s[i+1]);
+            } catch(NumberFormatException e){
+                e.printStackTrace();
+            }
         }
     }
 

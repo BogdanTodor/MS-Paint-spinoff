@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -19,11 +20,15 @@ public class Ellipse extends Ellipse2D  implements Shape{
 
     /** Recieves the position of the mouse clicks, splits them and populates the coords array
      * @param input The raw position of each mouse click registered by the Ellipse shape function*/
-    Ellipse(String input) {
+    Ellipse(String input){
         inputString = input;
         String s[] = input.split(" ");
         for (int i = 0; i < coords.length; i++) {
-            coords[i] = parseDouble(s[i+1]);
+            try {
+                coords[i] = parseDouble(s[i + 1]);
+            } catch(NumberFormatException e){
+                e.printStackTrace();
+            }
         }
     }
 

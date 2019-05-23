@@ -60,6 +60,9 @@ public class FileReaderClass {
             else if (splitted[0].equals("POLYGON")) {
                 Shape.lineCommands.add(new Polygon(stringExtractor(splitted)));
             }
+            else{
+
+            }
         }
         filecontent.close();
     }

@@ -42,10 +42,20 @@ public class Polygon implements Shape {
         int yindex = 0;
         for (int i = 1; i < s.length; i++) {
             if (i%2 == 1 && i != 0) {
-                xcoords[xindex++] = parseDouble(s[i]);
+                try{
+                    xcoords[xindex++] = parseDouble(s[i]);
+                } catch(NumberFormatException e){
+                    e.printStackTrace();
+                }
+
             }
             else if (i%2 == 0 && i != 0) {
-                ycoords[yindex++] = parseDouble(s[i]);
+                try{
+                    ycoords[yindex++] = parseDouble(s[i]);
+                } catch(NumberFormatException e){
+                    e.printStackTrace();
+                }
+
             }
         }
     }

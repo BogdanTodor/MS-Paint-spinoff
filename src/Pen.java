@@ -13,28 +13,27 @@ public class Pen implements Shape {
     Pen (String input) throws ShapeException{
         inputString = input;
         String s[];
-        if(input.contains("#")){
-            s = input.split(" #");
-        }else{
+        if(!input.contains("#")){
             throw new ShapeException("No '#' found in Pen command.");
-        }
-
-        if(s[1].length() == 7){
-        } else{
-            throw new ShapeException("Invalid colour command - Too many characters.");
+        }else{
+            s = input.split(" #");
         }
 
         System.out.println(s[1].length());
 
-        int rr = Integer.parseInt(s[1].substring(0,2), 16);
-        int gg = Integer.parseInt(s[1].substring(2,4), 16);
-        int bb = Integer.parseInt(s[1].substring(4,6), 16);
-
-        try{
+        if(s[1].length() > 7){
+            throw new ShapeException("Invalid colour command - Too many characters.");
+        } else{
+            int rr = Integer.parseInt(s[1].substring(0,2), 16);
+            int gg = Integer.parseInt(s[1].substring(2,4), 16);
+            int bb = Integer.parseInt(s[1].substring(4,6), 16);
             color = new Color(rr, gg, bb);
-        }catch(Exception e){
-            throw new ShapeException("Invalid colour pattern");
+
+
         }
+
+
+
 
 
 

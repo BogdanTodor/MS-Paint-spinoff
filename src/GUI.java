@@ -179,12 +179,14 @@ public class GUI extends JFrame implements Runnable {
         menuItem = new JMenuItem("Fill color");
         menuItem.addActionListener(e -> {
             Color newFillColor = JColorChooser.showDialog(GUI.this, "Select Fill Color", Color.BLACK);
-            if (newFillColor != null) {
-                fillToggleButton.setSelected(true);
-                fillToggleButton.setText("Fill: On");
-                String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                Shape.lineCommands.add(new Fill("FILL " + hex));
-            }
+            try{
+                if (newFillColor != null) {
+                    fillToggleButton.setSelected(true);
+                    fillToggleButton.setText("Fill: On");
+                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                }
+            } catch (ShapeException z){}
         });
         menu.add(menuItem);
 
@@ -320,11 +322,17 @@ public class GUI extends JFrame implements Runnable {
             if (fillToggleButton.isSelected()) {
                 Color newFillColor = fillColorChooser.getColor();
                 String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                Shape.lineCommands.add(new Fill("FILL " + hex));
+                try{
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                } catch(ShapeException z){}
+
                 fillToggleButton.setText("Fill: On");
             }
             else if (!fillToggleButton.isSelected()) {
-                Shape.lineCommands.add(new Fill("FILL OFF"));
+                try{
+                    Shape.lineCommands.add(new Fill("FILL OFF"));
+                } catch (ShapeException z){}
+
                 fillToggleButton.setText("Fill: Off");
             }
             revalidate();
@@ -374,7 +382,9 @@ public class GUI extends JFrame implements Runnable {
             if (fillToggleButton.isSelected()) {
                 Color newFillColor = fillColorChooser.getColor();
                 String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                Shape.lineCommands.add(new Fill("FILL " + hex));
+                try{
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                } catch(ShapeException z){}
             }
         };
         fillModel.addChangeListener(changeListenerFill);

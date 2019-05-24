@@ -74,11 +74,11 @@ public class FileReader {
             }
         }
         else if (shapeType.equals("FILL")) {
-//            try{
+            try{
                 shape = new Fill(command);
-//            }catch(ShapeException z){
-//                throw new ShapeException(z);
-//            }
+            }catch(ShapeException z){
+                throw new ShapeException(z);
+            }
         }
         else if (shapeType.equals("ELLIPSE")) {
             try{

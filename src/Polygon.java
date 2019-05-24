@@ -34,8 +34,15 @@ public class Polygon implements Shape {
     Polygon( String input) throws ShapeException{
         inputString = input;
         String s[] = input.split(" ");
+        if((s.length % 2) == 0){
+            throw new ShapeException("Number of x coordinates does not match number of y coordinates.");
+        }
+        if(s.length > 201){
+            throw new ShapeException("Polygon has too many points.");
+        }
         xcoords = new double[(s.length - 1)/2];
         ycoords = new double[(s.length - 1)/2];
+
         xcoordsScaled = new double[xcoords.length];
         ycoordsScaled = new double[ycoords.length];
         int xindex = 0;
@@ -45,7 +52,7 @@ public class Polygon implements Shape {
                 try{
                     xcoords[xindex++] = parseDouble(s[i]);
                 } catch(Exception e){
-                    throw new ShapeException("Invalid coordinate input");
+                    throw new ShapeException("Invalid format for coordinate input.");
                 }
 
             }
@@ -53,7 +60,7 @@ public class Polygon implements Shape {
                 try{
                     ycoords[yindex++] = parseDouble(s[i]);
                 } catch(Exception e){
-                    throw new ShapeException("Invalid coordinate input");
+                    throw new ShapeException("Invalid format for coordinate input.");
                 }
 
             }

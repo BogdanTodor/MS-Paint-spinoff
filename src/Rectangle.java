@@ -30,7 +30,7 @@ public class Rectangle extends Rectangle2D implements Shape {
             try{
                 coords[i] = parseDouble(s[i + 1]);
             }catch(Exception e){
-                throw new ShapeException("Invalid coordinate input");
+                throw new ShapeException("Invalid format for coordinate input");
             }
         }
     }

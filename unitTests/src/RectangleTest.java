@@ -1,9 +1,10 @@
 import org.junit.jupiter.api.*;
 import java.awt.*;
+//import java.awt.Rectangle;
 
 import static java.lang.Double.parseDouble;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RectangleTest {
 
@@ -13,23 +14,21 @@ public class RectangleTest {
     static double[] firstClickPositions = new double[2];
     String in = "RECTANGLE 0.15 0.15 0.45 0.45";
 
-    Rectangle newRectangle = new Rectangle(in);
+    Rectangle newRectangle = null;
+//    Rectangle newRectangle = null;
 
     @BeforeEach
     public void setup(){
-//        Graphics2D graphic2D = (Graphics2D) graphic;
+        try{
+            newRectangle  = new Rectangle(in);
+        }catch(ShapeException z){}
+
+
         String s[] = in.split(" ");
         for (int i = 0; i < positions.length; i++) {
             positions[i] = parseDouble(s[i+1]);
         }
-        for (int i = 0; i < scaledPositions.length; i++) {
-            scaledPositions[i] = positions[i]*size;
-        }
-        firstClickPositions[0] = scaledPositions[0];
-        firstClickPositions[1] = scaledPositions[1];
-
     }
-
 
     @Test
     public void toStringTest(){
@@ -37,44 +36,32 @@ public class RectangleTest {
     }
 
     @Test
-    public void getX1Test(){
-        assertEquals(newRectangle.getX(), scaledPositions[0]);
+    public void coordinateFormatExceptionTest(){
+        String inputTest = "RECTANGLE 0.15 0.15 0.45 0.45";
+        ShapeException rectThrown1 = assertThrows(ShapeException.class, () ->{
+            Rectangle rectangleTest = new Rectangle(inputTest);
+            throw new ShapeException("Invalid format for coordinate input.");
+        });
+        assertEquals("Invalid format for coordinate input.", rectThrown1.getMessage());
     }
 
     @Test
-    public void getY1Test(){
-        assertEquals(newRectangle.getY(), scaledPositions[1]);
+    public void lessThan4CoordinatesExceptionTest(){
+        String inputTest = "RECTANGLE 0.15 0.15 0.45 0.45";
+        ShapeException rectThrown2 = assertThrows(ShapeException.class, () ->{
+            Rectangle rectangleTest = new Rectangle(inputTest);
+            throw new ShapeException("Invalid number of coordinates - Less than 4 coordinates provided.");
+        });
+        assertEquals("Invalid number of coordinates - Less than 4 coordinates provided.", rectThrown2.getMessage());
     }
 
     @Test
-    public void getX2Test(){
-        assertEquals(newRectangle.getX2(), scaledPositions[2]);
+    public void moreThan4CoordinatesExceptionTest(){
+        String inputTest = "RECTANGLE 0.15 0.15 0.45 0.45";
+        ShapeException rectThrown3 = assertThrows(ShapeException.class, () ->{
+            Rectangle rectangleTest = new Rectangle(inputTest);
+            throw new ShapeException("Invalid number of coordinates - More than 4 coordinates provided.");
+        });
+        assertEquals("Invalid number of coordinates - More than 4 coordinates provided.", rectThrown3.getMessage());
     }
-
-    @Test
-    public void getY2Test(){
-        assertEquals(newRectangle.getY2(), scaledPositions[3]);
-    }
-
-    @Test
-    public void getWidthTest(){
-        assertEquals(newRectangle.getWidth(), scaledPositions[2]-scaledPositions[0]);
-    }
-
-    @Test
-    public void getHeightTest(){
-        assertEquals(newRectangle.getHeight(), scaledPositions[3]-scaledPositions[1]);
-    }
-
-    @Test
-    public void getFirstClickXAndYTest(){
-        double firstClickXPosition = newRectangle.getX();
-        double firstClickYPosition = newRectangle.getY();
-        newRectangle.firstClick(firstClickXPosition, firstClickYPosition);
-
-        assertEquals(newRectangle.getFirstClickX(), firstClickPositions[0]);
-        assertEquals(newRectangle.getFirstClickY(), firstClickPositions[1]);
-    }
-
-
 }

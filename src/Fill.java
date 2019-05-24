@@ -16,6 +16,14 @@ public class Fill implements Shape {
     Fill (String input) throws ShapeException{
         inputString = input;
         String s[] = input.split(" ");
+        if(s[1].substring(0,1) != "#" || s[1].substring(0,3) != "OFF"){
+            throw new ShapeException("No '#' found in Fill command.");
+        }
+
+        if(s[1].length() > 7){
+            throw new ShapeException("Invalid colour code combination");
+        }
+
         if (s[1].substring(0,3).equals("OFF")) {
             fill = false;
         }
@@ -24,12 +32,8 @@ public class Fill implements Shape {
             int rr = Integer.parseInt(s[1].substring(1,3), 16);
             int gg = Integer.parseInt(s[1].substring(3,5), 16);
             int bb = Integer.parseInt(s[1].substring(5,7), 16);
+            this.color = new Color(rr, gg, bb);
 
-            try{
-                this.color = new Color(rr, gg, bb);
-            } catch(Exception e){
-                throw new ShapeException("Invalid colour pattern.");
-            }
         }
         Colors.setIsFillOn(fill);
     }

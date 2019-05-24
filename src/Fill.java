@@ -4,9 +4,9 @@ import java.awt.*;
 public class Fill implements Shape {
 
     /** The colour of the fill or pen fill.*/
-    public Color color;
+    private Color color;
     /** The state of whether or not fill is on or off*/
-    public Boolean fill;
+    private Boolean fill;
     /** The mouse click position expressed as x,y coordinate pairs*/
     String inputString ;
 

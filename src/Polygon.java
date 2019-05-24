@@ -6,16 +6,16 @@ import static java.lang.Double.parseDouble;
 public class Polygon implements Shape {
 
     /** An array storing all the horizontal mouse click locations.*/
-    double[] xcoords;
+    private double[] xcoords;
 
     /** An array storing all the vertical mouse click locations.*/
-    double[] ycoords;
+    private double[] ycoords;
 
     /** xcoords scaled to the screen size, lies between 0 and 1.*/
-    double[] xcoordsScaled;
+    private double[] xcoordsScaled;
 
     /** ycoords scaled to the screen size, lies between 0 and 1.*/
-    double[] ycoordsScaled;
+    private double[] ycoordsScaled;
 
     /** Stores the raw horizontal mouse click coordinates.*/
     static double[] ClickCoordsX = new double[100];

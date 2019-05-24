@@ -5,13 +5,13 @@ import java.awt.geom.Ellipse2D;
 public class Plot implements Shape {
 
     /** Stores the x and y position of the most recent mouse click*/
-    double[] coords = new double[2];
+    private double[] coords = new double[2];
 
     /** The values stores in 'coords' scaled to the screen size.*/
-    double[] coordsScaled = new double [2];
+    private double[] coordsScaled = new double [2];
 
     /** The string representation of the plot shape.*/
-    String inputString;
+    private String inputString;
 
     /** Recieves the position of the mouse clicks and populates the coords array.
      * @param input The raw position of each mouse click registered by the plot shape function*/

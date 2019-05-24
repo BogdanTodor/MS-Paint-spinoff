@@ -9,14 +9,14 @@ import static java.lang.Double.parseDouble;
 public class Rectangle extends Rectangle2D implements Shape {
 
     /** The string used to parse the mouse position into the rectangle shape.*/
-    String inputString;
+    private String inputString;
 
     /** Stores the input string broken into two pairs of raw x,y coordinates.*/
-    double[] coords = new double[4];
+    private double[] coords = new double[4];
 
     /** Stores the pair of x,y coordinates stores in coords scaled according to the canvas resolution
      * such that the values lie between 0 and 1.*/
-    double[] coordsScaled = new double [4];
+    private double[] coordsScaled = new double [4];
 
     /** Stores position of the initial mouse click*/
     static double[] firstClickCoords = new double[2];

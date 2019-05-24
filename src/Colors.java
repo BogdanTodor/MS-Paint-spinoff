@@ -4,13 +4,13 @@ import java.awt.*;
 public class Colors {
 
     /** The fill colour*/
-    public static Color fillColor;
+    private static Color fillColor;
 
     /** The pen colour*/
-    public static Color penColor = Color.BLACK;
+    private static Color penColor = Color.BLACK;
 
     /** Boolean field which sets the fill to off.*/
-    public static Boolean isFillOn = false;
+    private static Boolean isFillOn = false;
 
     /**
      * Gets the state of the isFillOn variable.

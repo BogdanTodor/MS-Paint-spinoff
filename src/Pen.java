@@ -3,10 +3,10 @@ import java.awt.*;
 /** Used to set the colour of the pen and store the pattern as a string.*/
 public class Pen implements Shape {
     /** The colour of the pen.*/
-    public Color color;
+    private Color color;
 
     /** The string representation of the chosen colour.*/
-    String inputString;
+    private String inputString;
 
     /** Sets the colour of the pen based on the input pattern.
      * @param input The character representation of the chosen colour.*/

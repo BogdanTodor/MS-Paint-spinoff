@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class FileReader {
 
 
-    public static String input;
+    private static String input;
 
 
     /** Extract each element from the input array and save them as a string.

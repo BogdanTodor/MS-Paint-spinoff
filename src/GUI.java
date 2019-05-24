@@ -480,6 +480,9 @@ public class GUI extends JFrame implements Runnable {
                 else if (ellipseButton.isSelected()) {
                     Shape.lineCommands.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
                 }
+                if (Shape.previewShape.size() > 0) {
+                    Shape.previewShape.removeFirst();
+                }
                 revalidate();
                 repaint();
             }
@@ -591,11 +594,11 @@ public class GUI extends JFrame implements Runnable {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 FileReader.open(selectedFile.getPath());
-                if (Colors.isFillOn) {
+                if (Colors.getIsFillOn()) {
                     fillToggleButton.setSelected(true);
                     fillToggleButton.setText("Fill: On");
                 }
-                if (!Colors.isFillOn) {
+                if (!Colors.getIsFillOn()) {
                     resetFillButton();
                 }
                 revalidate();

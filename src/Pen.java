@@ -9,7 +9,8 @@ public class Pen implements Shape {
     private String inputString;
 
     /** Sets the colour of the pen based on the input pattern.
-     * @param input The character representation of the chosen colour.*/
+     * @param input The character representation of the chosen colour.
+     * @exception ShapeException Throws a Shape Exception if the input cannot be handled.*/
     Pen (String input) throws ShapeException {
         inputString = input;
         String s[];

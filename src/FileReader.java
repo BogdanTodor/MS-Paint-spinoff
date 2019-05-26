@@ -25,7 +25,8 @@ public class FileReader {
     }
 
     /** Opens the selected VEC formatted file and loads the commands stored within the file.
-     * @param path The path of the file to be opened.*/
+     * @param path The path of the file to be opened.
+     * @exception Exception Throws an exception on failure to open file.*/
     public static void open(String path) throws Exception{
         File file = new File(path);
 
@@ -43,6 +44,12 @@ public class FileReader {
         filecontent.close();
     }
 
+    /** Instantiates a new shape depending on the shape type.
+     * @param shapeType A string representing the type of shape command to create.
+     * @param command A string representing the coordinates for the shape command.
+     * @exception ShapeException Throws a shape extension if shape command instantiation fails.
+     * @return The shape created.
+     * */
     public static Shape createShape(String shapeType, String command) throws ShapeException {
         Shape shape = null;
         try {

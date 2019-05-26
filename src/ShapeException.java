@@ -1,3 +1,5 @@
+
+/** An exception class to deal with the various shape commands.*/
 class ShapeException extends Exception{
     public ShapeException(){
         super();

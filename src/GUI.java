@@ -56,7 +56,8 @@ public class GUI extends JFrame implements Runnable {
     }
 
     /**
-     * Create the menu bar.
+     * Creates the menu bar, adds the necessary buttons for tools and functionality
+     * and implements the undo history functionality.
      */
     private JMenuBar createMenuBar() {
         JMenu menu;
@@ -197,11 +198,11 @@ public class GUI extends JFrame implements Runnable {
     }
 
     /**
-     * Adds components to the content pane, including:
-     * Panels, Buttons, ColorChoosers, Tabs
+     * Adds the components to the content pane, including:
+     * Panels, Buttons, ColorChoosers, Tabs. This method also implements the mouse click events required to retrieve
+     * coordinates for plotting shapes onto the canvas.
      *
      * @parem pane the pane to add components to.
-     *
      */
     private void addComponentsToPane(Container pane) {
         // Setup layout and components

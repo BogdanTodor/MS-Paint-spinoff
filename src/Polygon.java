@@ -3,6 +3,7 @@ import java.awt.geom.Path2D;
 
 import static java.lang.Double.parseDouble;
 
+/** Used to draw the polygon shape object*/
 public class Polygon implements Shape {
 
     /** An array storing all the horizontal mouse click locations.*/
@@ -29,8 +30,9 @@ public class Polygon implements Shape {
     /** The string representation of the shape.*/
     String inputString;
 
-    /** Takes in the mouse click coordinates and stores the results in
-     * xcoords and ycoords.*/
+    /** Takes in the mouse click coordinates and stores the results in xcoords and ycoords.
+     * @param input The raw position of each mouse click registered by the Polygon shape function
+     * @exception ShapeException Throws a Shape Exception if the input cannot be handled.*/
     Polygon( String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");

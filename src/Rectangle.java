@@ -4,8 +4,8 @@ import java.awt.geom.Rectangle2D;
 
 import static java.lang.Double.parseDouble;
 
-// Extends Rectangle2D to make use of the fill() method for future functionality.
 
+/** Used to draw the rectangle shape object.*/
 public class Rectangle extends Rectangle2D implements Shape {
 
     /** The string used to parse the mouse position into the rectangle shape.*/
@@ -21,8 +21,9 @@ public class Rectangle extends Rectangle2D implements Shape {
     /** Stores position of the initial mouse click*/
     static double[] firstClickCoords = new double[2];
 
-    /** Recieves the position of the mouse clicks, splits them and populates the coords array
-     * @param input The raw position of each mouse click registered by the rectangle shape function*/
+    /** Recieves the position of the mouse clicks, splits them and populates the coords array.
+     * @param input The raw position of each mouse click registered by the rectangle shape function.
+     * @exception ShapeException Throws a Shape Exception if the input cannot be handled.*/
     Rectangle( String input) throws ShapeException{
         String s[] = input.split(" ");
         if(s.length < 5){

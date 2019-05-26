@@ -14,7 +14,8 @@ public class Plot implements Shape {
     private String inputString;
 
     /** Recieves the position of the mouse clicks and populates the coords array.
-     * @param input The raw position of each mouse click registered by the plot shape function*/
+     * @param input The raw position of each mouse click registered by the plot shape function.
+     * @exception ShapeException Throws a Shape Exception if the input cannot be handled.*/
     Plot( String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");

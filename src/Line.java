@@ -18,7 +18,8 @@ public class Line implements Shape {
     private String inputString;
 
     /** Recieves the position of the mouse clicks, splits them and populates the coords array
-     * @param input The raw position of each mouse click registered by the line shape function*/
+     * @param input The raw position of each mouse click registered by the line shape function.
+     * @exception ShapeException Throws a Shape Exception if the input cannot be handled.*/
     Line( String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");

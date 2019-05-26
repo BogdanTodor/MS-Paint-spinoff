@@ -6,6 +6,7 @@ import java.awt.geom.Rectangle2D;
 
 import static java.lang.Double.parseDouble;
 
+/** Class used to instantiate and draw the ellipse shape.*/
 public class Ellipse extends Ellipse2D  implements Shape{
 
     /** The string used to parse the mouse position into the Ellipse shape.*/
@@ -18,8 +19,9 @@ public class Ellipse extends Ellipse2D  implements Shape{
     /** Stores position of the initial mouse click*/
     private static double[] firstClickCoords = new double[2];
 
-    /** Recieves the position of the mouse clicks, splits them and populates the coords array
-     * @param input The raw position of each mouse click registered by the Ellipse shape function*/
+    /** Recieves the position of the mouse clicks, splits them and populates the coords array.
+     * @param input The raw position of each mouse click registered by the Ellipse shape function.
+     * @exception ShapeException Throws a Shape Exception if the input cannot be handled.*/
     Ellipse(String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");

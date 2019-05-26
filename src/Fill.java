@@ -12,7 +12,8 @@ public class Fill implements Shape {
 
     /** Fills the inside portion of the shape with colour if the fill instruction is declared on the gui or in an
      * opened file.
-     * @param input The string representation of a shape object*/
+     * @param input The string representation of a shape object
+     * @exception ShapeException Throws a ShapeException if the input is incorrect or formatted incorrectly.*/
     Fill (String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");

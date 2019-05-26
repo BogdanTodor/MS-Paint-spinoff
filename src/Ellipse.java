@@ -20,15 +20,22 @@ public class Ellipse extends Ellipse2D  implements Shape{
 
     /** Recieves the position of the mouse clicks, splits them and populates the coords array
      * @param input The raw position of each mouse click registered by the Ellipse shape function*/
-    Ellipse(String input){
+    Ellipse(String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");
+        if(s.length < 5){
+            throw new ShapeException("Invalid number of coordinates - Less than 4 coordinates provided.");
+        }
+        else if(s.length > 5){
+            throw new ShapeException("Invalid number of coordinates - More than 4 coordinates provided.");
+        }
         for (int i = 0; i < coords.length; i++) {
-            try {
+            try{
                 coords[i] = parseDouble(s[i + 1]);
-            } catch(NumberFormatException e){
-                e.printStackTrace();
+            }catch(Exception e){
+                throw new ShapeException("Invalid format for coordinate input.");
             }
+
         }
     }
 

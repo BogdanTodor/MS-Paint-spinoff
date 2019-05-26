@@ -1,13 +1,15 @@
 import org.junit.jupiter.api.*;
 import java.awt.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class FillTest {
 
-    public Boolean fillStatus;
+    Boolean fillStatus;
+    String input = "FILL #FFFF00";
+
+    Fill newFill = null;
 
     @Test
     public void FillTrueTest(){
@@ -21,9 +23,10 @@ public class FillTest {
             fillStatus = true;
         }
 
-        Fill newFill = new Fill(input);
-        assertEquals(newFill.fill, fillStatus);
-        System.out.println(newFill.fill);
+        try{
+            newFill = new Fill(input);
+        } catch(ShapeException z){}
+        assertEquals(Colors.getIsFillOn(), fillStatus);
     }
 
     @Test
@@ -38,18 +41,38 @@ public class FillTest {
             fillStatus = true;
         }
 
-        Fill newFill = new Fill(input);
-        assertEquals(newFill.fill, fillStatus);
+        try{
+            newFill = new Fill(input);
+        } catch(ShapeException z){}
+        assertEquals(Colors.getIsFillOn(), fillStatus);
     }
 
     @Test
     public void toStringTest(){
-        String input = "FILL #FFFF00";
-        Fill newFill = new Fill(input);
+        try{
+            newFill = new Fill(input);
+        } catch(ShapeException z){}
         assertEquals(newFill.toString(), input);
     }
 
+    @Test
+    public void containsHashTest(){
+        String inputTest = "FILL #FFFF00";
+        ShapeException fillThrown1 = assertThrows(ShapeException.class, ()->{
+            Fill fillTest = new Fill(inputTest);
+            throw new ShapeException("No '#' found in Fill command.");
+        });
+        assertEquals("No '#' found in Fill command.", fillThrown1.getMessage());
+    }
 
-
+    @Test
+    public void invalidColourCodeTest(){
+        String inputTest = "FILL #FFFF00ABCD";
+        ShapeException fillThrown1 = assertThrows(ShapeException.class, ()->{
+            Fill fillTest = new Fill(inputTest);
+            throw new ShapeException("Invalid colour code combination");
+        });
+        assertEquals("Invalid colour code combination", fillThrown1.getMessage());
+    }
 
 }

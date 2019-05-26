@@ -43,31 +43,36 @@ public class FileReader {
         filecontent.close();
     }
 
-    public static Shape createShape(String shapeType, String command) {
+    public static Shape createShape(String shapeType, String command) throws ShapeException {
         Shape shape = null;
-        if (shapeType.equals("LINE")) {
-            shape = new Line(command);
-        }
-        else if (shapeType.equals("PLOT")) {
-            shape = new Plot(command);
-        }
-        else if (shapeType.equals("RECTANGLE")) {
-            shape = new Rectangle(command);
-        }
-        else if (shapeType.equals("PEN")) {
-            shape = new Pen(command);
-        }
-        else if (shapeType.equals("FILL")) {
-            shape = new Fill(command);
-        }
-        else if (shapeType.equals("ELLIPSE")) {
-            shape = new Ellipse(command);
-        }
-        else if (shapeType.equals("POLYGON")) {
-            shape = new Polygon(command);
-        }
-        else{
+        try {
+            if (shapeType.equals("LINE")) {
+                shape = new Line(command);
+            }
+            else if (shapeType.equals("PLOT")) {
+                shape = new Plot(command);
+            }
+            else if (shapeType.equals("RECTANGLE")) {
+                shape = new Rectangle(command);
+            }
+            else if (shapeType.equals("PEN")) {
+                shape = new Pen(command);
+            }
+            else if (shapeType.equals("FILL")) {
+                shape = new Fill(command);
+            }
+            else if (shapeType.equals("ELLIPSE")) {
+                shape = new Ellipse(command);
+            }
+            else if (shapeType.equals("POLYGON")) {
+                shape = new Polygon(command);
+            }
+            else{
 //            throw new FileTypeException();
+            }
+        }
+        catch (ShapeException e) {
+            throw e;
         }
         return shape;
     }

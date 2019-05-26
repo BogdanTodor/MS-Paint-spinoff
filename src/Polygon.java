@@ -31,9 +31,15 @@ public class Polygon implements Shape {
 
     /** Takes in the mouse click coordinates and stores the results in
      * xcoords and ycoords.*/
-    Polygon( String input) {
+    Polygon( String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");
+        if((s.length % 2) == 0){
+            throw new ShapeException("Number of x coordinates does not match number of y coordinates.");
+        }
+        if(s.length > 201){
+            throw new ShapeException("Polygon has too many points.");
+        }
         xcoords = new double[(s.length - 1)/2];
         ycoords = new double[(s.length - 1)/2];
         xcoordsScaled = new double[xcoords.length];
@@ -45,7 +51,7 @@ public class Polygon implements Shape {
                 try{
                     xcoords[xindex++] = parseDouble(s[i]);
                 } catch(NumberFormatException e){
-                    e.printStackTrace();
+                    throw new ShapeException("Invalid format for coordinate input.");
                 }
 
             }
@@ -53,7 +59,7 @@ public class Polygon implements Shape {
                 try{
                     ycoords[yindex++] = parseDouble(s[i]);
                 } catch(NumberFormatException e){
-                    e.printStackTrace();
+                    throw new ShapeException("Invalid format for coordinate input.");
                 }
 
             }

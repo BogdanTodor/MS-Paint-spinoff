@@ -10,13 +10,23 @@ public class Pen implements Shape {
 
     /** Sets the colour of the pen based on the input pattern.
      * @param input The character representation of the chosen colour.*/
-    Pen (String input) {
+    Pen (String input) throws ShapeException {
         inputString = input;
-        String s[] = input.split(" #");
-        int rr = Integer.parseInt(s[1].substring(0,2), 16);
-        int gg = Integer.parseInt(s[1].substring(2,4), 16);
-        int bb = Integer.parseInt(s[1].substring(4,6), 16);
-        color = new Color(rr, gg, bb);
+        String s[];
+        if(!input.contains("#")){
+            throw new ShapeException("No '#' found in Pen command.");
+        }
+        s = input.split(" #");
+        if(s[1].length() != 6){
+            throw new ShapeException("Invalid colour command - Incorrect number of characters.");
+        }
+        else {
+            int rr = Integer.parseInt(s[1].substring(0,2), 16);
+            int gg = Integer.parseInt(s[1].substring(2,4), 16);
+            int bb = Integer.parseInt(s[1].substring(4,6), 16);
+            color = new Color(rr, gg, bb);
+            Colors.setPenColor(this.color);
+        }
     }
 
     /** Sets the colour of the pen in the graphics driver.

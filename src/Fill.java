@@ -13,11 +13,17 @@ public class Fill implements Shape {
     /** Fills the inside portion of the shape with colour if the fill instruction is declared on the gui or in an
      * opened file.
      * @param input The string representation of a shape object*/
-    Fill (String input) {
+    Fill (String input) throws ShapeException {
         inputString = input;
         String s[] = input.split(" ");
         if (s[1].substring(0,3).equals("OFF")) {
             fill = false;
+        }
+        else if(!s[1].substring(0,1).equals("#")){
+            throw new ShapeException("'#' value incorrect in Fill command");
+        }
+        else if(s[1].length() != 7){
+            throw new ShapeException("Invalid colour code combination");
         }
         else {
             fill = true;

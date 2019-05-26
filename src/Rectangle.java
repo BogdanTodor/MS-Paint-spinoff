@@ -23,14 +23,20 @@ public class Rectangle extends Rectangle2D implements Shape {
 
     /** Recieves the position of the mouse clicks, splits them and populates the coords array
      * @param input The raw position of each mouse click registered by the rectangle shape function*/
-    Rectangle( String input) {
-        inputString = input;
+    Rectangle( String input) throws ShapeException{
         String s[] = input.split(" ");
+        if(s.length < 5){
+            throw new ShapeException("Invalid number of coordinates - Less than 4 coordinates provided.");
+        }
+        else if(s.length > 5){
+            throw new ShapeException("Invalid number of coordinates - More than 4 coordinates provided.");
+        }
+        inputString = input;
         for (int i = 0; i < coords.length; i++) {
             try {
                 coords[i] = parseDouble(s[i + 1]);
             } catch(NumberFormatException e){
-            e.printStackTrace();
+                throw new ShapeException("Invalid format for coordinate input");
             }
         }
     }

@@ -84,11 +84,16 @@ public class GUI extends JFrame implements Runnable {
             JPopupMenu popup = new JPopupMenu();
 
             ActionListener menuListener = event -> {
-                Shape shape;
+                Shape shape = null;
                 String vecItem = event.getActionCommand();
                 String[] splitted = vecItem.split(" ");
 
-                shape = FileReader.createShape(splitted[0], vecItem);
+                try {
+                    shape = FileReader.createShape(splitted[0], vecItem);
+                }
+                catch (ShapeException a) {
+
+                }
 
                 int index = Integer.MAX_VALUE;
                 for (int i = 0; i < Shape.lineCommands.size(); i++) {
@@ -120,12 +125,17 @@ public class GUI extends JFrame implements Runnable {
         menuItem.addActionListener(e -> {
             JPopupMenu popup = new JPopupMenu();
             ActionListener menuListener = event -> {
-                Shape shape;
+                Shape shape = null;
                 String vecItem = event.getActionCommand();
                 String[] splitted = vecItem.split(" ");
                 // Display output of the read lines.
 
-                shape = FileReader.createShape(splitted[0], vecItem);
+                try {
+                    shape = FileReader.createShape(splitted[0], vecItem);
+                }
+                catch (ShapeException a) {
+
+                }
 
                 int index = Integer.MAX_VALUE;
                 for (int i = 0; i < Shape.deletedLineCommands.size(); i++) {
@@ -164,7 +174,8 @@ public class GUI extends JFrame implements Runnable {
             Color newPenColor = JColorChooser.showDialog(GUI.this, "Select Pen Color", Color.BLACK);
             if (newPenColor != null) {
                 String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
-                Shape.lineCommands.add(new Pen("PEN " + hex));
+                try { Shape.lineCommands.add(new Pen("PEN " + hex)); }
+                catch (ShapeException c) {}
             }
         });
         menu.add(menuItem);
@@ -176,7 +187,8 @@ public class GUI extends JFrame implements Runnable {
                 fillToggleButton.setSelected(true);
                 fillToggleButton.setText("Fill: On");
                 String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                Shape.lineCommands.add(new Fill("FILL " + hex));
+                try {Shape.lineCommands.add(new Fill("FILL " + hex)); }
+                catch (ShapeException c) {}
             }
         });
         menu.add(menuItem);
@@ -310,16 +322,19 @@ public class GUI extends JFrame implements Runnable {
 
         fillToggleButton = new JToggleButton("Fill: Off");
         fillToggleButton.addActionListener(e -> {
-            if (fillToggleButton.isSelected()) {
-                Color newFillColor = fillColorChooser.getColor();
-                String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                Shape.lineCommands.add(new Fill("FILL " + hex));
-                fillToggleButton.setText("Fill: On");
+            try {
+                if (fillToggleButton.isSelected()) {
+                    Color newFillColor = fillColorChooser.getColor();
+                    String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
+                    Shape.lineCommands.add(new Fill("FILL " + hex));
+                    fillToggleButton.setText("Fill: On");
+                }
+                else if (!fillToggleButton.isSelected()) {
+                    Shape.lineCommands.add(new Fill("FILL OFF"));
+                    fillToggleButton.setText("Fill: Off");
+                }
             }
-            else if (!fillToggleButton.isSelected()) {
-                Shape.lineCommands.add(new Fill("FILL OFF"));
-                fillToggleButton.setText("Fill: Off");
-            }
+            catch (ShapeException c2) {}
             revalidate();
             repaint();
         });
@@ -345,7 +360,8 @@ public class GUI extends JFrame implements Runnable {
         ChangeListener changeListenerPen = changeEvent -> {
             Color newPenColor = penColorChooser.getColor();
             String hex = String.format("#%02x%02x%02x", newPenColor.getRed(), newPenColor.getGreen(), newPenColor.getBlue());
-            Shape.lineCommands.add(new Pen("PEN " + hex));
+            try {Shape.lineCommands.add(new Pen("PEN " + hex)); }
+            catch (ShapeException e) {}
         };
         penModel.addChangeListener(changeListenerPen);
 
@@ -362,7 +378,8 @@ public class GUI extends JFrame implements Runnable {
             if (fillToggleButton.isSelected()) {
                 Color newFillColor = fillColorChooser.getColor();
                 String hex = String.format("#%02x%02x%02x", newFillColor.getRed(), newFillColor.getGreen(), newFillColor.getBlue());
-                Shape.lineCommands.add(new Fill("FILL " + hex));
+                try {Shape.lineCommands.add(new Fill("FILL " + hex)); }
+                catch (ShapeException c3) {}
             }
         };
         fillModel.addChangeListener(changeListenerFill);
@@ -426,28 +443,31 @@ public class GUI extends JFrame implements Runnable {
             public void mouseClicked(MouseEvent e) {
                 double x = round(e.getX()/dynamicWidth,2);
                 double y = round(e.getY()/dynamicHeight,2);
-                if(plotButton.isSelected()) {
-                    Shape.lineCommands.add(new Plot("PLOT "+x+" "+y));
-                }
-                if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1 && polyButton.isSelected()) {
-                    System.out.println("Right CLICK");
-                    StringBuilder input = new StringBuilder("POLYGON");
-                    for (int i = 0; i < Polygon.getClickCount(); i++) {
-                        input.append(" ").append(Polygon.ClickCoordsX[i]).append(" ").append(Polygon.ClickCoordsY[i]);
+                try {
+                    if(plotButton.isSelected()) {
+                        Shape.lineCommands.add(new Plot("PLOT "+x+" "+y));
                     }
-                    input.append(" ").append(Polygon.ClickCoordsX[0]).append(" ").append(Polygon.ClickCoordsY[0]);
-                    System.out.println(input);
-                    Shape.lineCommands.add(new Polygon(input.toString()));
-                    Polygon.resetClickCount();
+                    if(SwingUtilities.isRightMouseButton(e) && e.getClickCount() == 1 && polyButton.isSelected()) {
+                        System.out.println("Right CLICK");
+                        StringBuilder input = new StringBuilder("POLYGON");
+                        for (int i = 0; i < Polygon.getClickCount(); i++) {
+                            input.append(" ").append(Polygon.ClickCoordsX[i]).append(" ").append(Polygon.ClickCoordsY[i]);
+                        }
+                        input.append(" ").append(Polygon.ClickCoordsX[0]).append(" ").append(Polygon.ClickCoordsY[0]);
+                        System.out.println(input);
+                        Shape.lineCommands.add(new Polygon(input.toString()));
+                        Polygon.resetClickCount();
 
+                    }
+                    else if(polyButton.isSelected()) {
+                        System.out.println("Clicked " +x+" "+y);
+                        System.out.println("Click count " + Polygon.getClickCount());
+                        Polygon.ClickCoordsX[Polygon.getClickCount()] = x;
+                        Polygon.ClickCoordsY[Polygon.getClickCount()] = y;
+                        Polygon.addClick();
+                    }
                 }
-                else if(polyButton.isSelected()) {
-                    System.out.println("Clicked " +x+" "+y);
-                    System.out.println("Click count " + Polygon.getClickCount());
-                    Polygon.ClickCoordsX[Polygon.getClickCount()] = x;
-                    Polygon.ClickCoordsY[Polygon.getClickCount()] = y;
-                    Polygon.addClick();
-                }
+                catch (ShapeException a) {}
                 revalidate();
                 repaint();
             }
@@ -471,18 +491,23 @@ public class GUI extends JFrame implements Runnable {
             public void mouseReleased(MouseEvent e) {
                 double x2 = round(e.getX()/dynamicWidth,2);
                 double y2 = round(e.getY()/dynamicHeight,2);
-                if (lineButton.isSelected()) {
-                    Shape.lineCommands.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
+                try {
+                    if (lineButton.isSelected()) {
+                        Shape.lineCommands.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
+                    }
+                    else if (rectangleButton.isSelected()) {
+                        Shape.lineCommands.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
+                    }
+                    else if (ellipseButton.isSelected()) {
+                        Shape.lineCommands.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
+                    }
+                    if (Shape.previewShape.size() > 0) {
+                        Shape.previewShape.removeFirst();
+                    }
                 }
-                else if (rectangleButton.isSelected()) {
-                    Shape.lineCommands.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
-                }
-                else if (ellipseButton.isSelected()) {
-                    Shape.lineCommands.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
-                }
-                if (Shape.previewShape.size() > 0) {
-                    Shape.previewShape.removeFirst();
-                }
+                catch (ShapeException b) {
+                    showMessageDialog(getContentPane(), "File could not be opened.");
+                };
                 revalidate();
                 repaint();
             }
@@ -492,18 +517,22 @@ public class GUI extends JFrame implements Runnable {
             public void mouseDragged(MouseEvent e) {
                 double x2 = round(e.getX()/dynamicWidth,2);
                 double y2 = round(e.getY()/dynamicHeight,2);
-                if (lineButton.isSelected()) {
-                    Shape.previewShape.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
+                try {
+                    if (lineButton.isSelected()) {
+                        Shape.previewShape.add(new Line("LINE "+ Line.getFirstClickX()+ " " + Line.getFirstClickY() + " " +x2+" "+y2));
+                    }
+                    else if (rectangleButton.isSelected()) {
+                        Shape.previewShape.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
+                    }
+                    else if (ellipseButton.isSelected()) {
+                        Shape.previewShape.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
+                    }
+                    while (Shape.previewShape.size()>1) {
+                        Shape.previewShape.removeFirst();
+                    }
                 }
-                else if (rectangleButton.isSelected()) {
-                    Shape.previewShape.add(new Rectangle("RECTANGLE "+ min(Rectangle.getFirstClickX(),x2)+ " " + min(Rectangle.getFirstClickY(),y2) + " " + max(Rectangle.getFirstClickX(),x2)+" "+max(Rectangle.getFirstClickY(),y2)));
-                }
-                else if (ellipseButton.isSelected()) {
-                    Shape.previewShape.add(new Ellipse("ELLIPSE "+ min(Ellipse.getFirstClickX(),x2)+ " " + min(Ellipse.getFirstClickY(),y2) + " " +max(Ellipse.getFirstClickX(),x2)+" "+max(Ellipse.getFirstClickY(),y2)));
-                }
-                while (Shape.previewShape.size()>1) {
-                    Shape.previewShape.removeFirst();
-                }
+                catch (ShapeException b) {
+                    showMessageDialog(getContentPane(), "File could not be opened.");}
                 revalidate();
                 repaint();
             }
@@ -601,12 +630,14 @@ public class GUI extends JFrame implements Runnable {
                 if (!Colors.getIsFillOn()) {
                     resetFillButton();
                 }
-                revalidate();
-                repaint();
             }
-            catch (Exception ex) {
+            catch (ShapeException ex) {
+                showMessageDialog(this, ex.getMessage());
+            } catch (Exception e) {
                 showMessageDialog(this, "File could not be opened.");
             }
+            revalidate();
+            repaint();
         }
     }
 
@@ -629,12 +660,15 @@ public class GUI extends JFrame implements Runnable {
             File selectedFile = fileChooser.getSelectedFile();
             try {
                 FileReader.save(selectedFile.getPath()+".vec");
-                revalidate();
-                repaint();
+            }
+            catch (ShapeException ex) {
+                showMessageDialog(this, ex.getMessage());
             }
             catch (Exception ex) {
                 showMessageDialog(this, "File could not be saved");
             }
+            revalidate();
+            repaint();
         }
     }
 
